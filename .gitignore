@@ -1,0 +1,11 @@
+# === Segreti — MAI nel repo ===
+config.php
+
+# === Stato volatile del server ===
+data/throttle.json
+
+# === File generato dal deploy (sincronizzato da hub/sistema/catalogo.json) ===
+app/assets/catalogo.js
+
+# === Sistema ===
+.DS_Store

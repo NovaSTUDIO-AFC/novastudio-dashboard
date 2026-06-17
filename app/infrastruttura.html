@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Infrastruttura — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Mappa Infrastruttura</h1>
+        <div class="sub">Cruscotto privato · rete Tailscale</div>
+      </div>
+      <span class="badge"><span class="dot"></span> Server online</span>
+    </header>
+
+    <section>
+      <h2>Mappa della rete</h2>
+      <div class="card map-card"><div id="map-wrap"></div></div>
+    </section>
+
+    <section>
+      <h2>Macchine</h2>
+      <div id="machines" class="grid-cards"></div>
+    </section>
+
+    <section>
+      <h2>Scorciatoie</h2>
+      <div class="card"><div id="shortcuts"></div></div>
+    </section>
+
+    <section>
+      <h2>Servizi sul Mac mini</h2>
+      <div id="services" class="grid-cards"></div>
+    </section>
+
+    <footer>Versione 1 · struttura estendibile · da pubblicare dietro autenticazione reale</footer>
+  </div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

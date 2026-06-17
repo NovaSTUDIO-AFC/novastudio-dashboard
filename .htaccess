@@ -1,0 +1,38 @@
+# ───────────────────────────────────────────────────────────────
+# NovaSTUDIO — gate area riservata (Hostinger / Apache)
+# ───────────────────────────────────────────────────────────────
+
+Options -Indexes
+
+# Nega l'accesso diretto ai file sensibili (config, dati, sorgenti)
+<FilesMatch "^(config(\.sample)?\.php|_genhash\.php|.*\.md)$">
+  Require all denied
+</FilesMatch>
+
+# Proteggi la cartella dati (throttle/rate-limit) e l'app statica:
+# devono passare SOLO dal front controller index.php
+RedirectMatch 404 ^/.*/data/.*$
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Forza HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2) Lascia passare solo il front controller reale
+  RewriteRule ^index\.php$ - [L]
+
+  # 3) Tutto il resto → front controller (che decide auth e cosa servire)
+  RewriteCond %{REQUEST_URI} !/index\.php$
+  RewriteRule ^ index.php [L]
+</IfModule>
+
+# Header di sicurezza
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
