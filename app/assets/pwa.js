@@ -55,30 +55,43 @@
     document.body.appendChild(bg);
   }
 
-  function makeBtn() {
-    var b = document.getElementById("pwa-install");
-    if (b) return b;
-    b = document.createElement("button");
-    b.id = "pwa-install";
+  function clickInstalla() {
+    if (deferred) {
+      deferred.prompt();
+      deferred.userChoice.finally(function () { deferred = null; });
+    } else {
+      overlay(istruzioni());
+    }
+  }
+
+  // Bottone-link da inserire nel footer (sempre presente).
+  function makeLink() {
+    var b = document.createElement("button");
+    b.className = "pwa-install";
     b.type = "button";
     b.textContent = "⬇️ Installa l'app";
     b.style.cssText = [
+      "display:inline-block", "margin-left:10px", "padding:5px 12px",
+      "border:1px solid #2a3550", "border-radius:999px", "background:transparent",
+      "color:#4f8cff", "font:inherit", "font-size:13px", "cursor:pointer"
+    ].join(";");
+    b.onclick = clickInstalla;
+    return b;
+  }
+
+  // Fallback flottante (se una pagina non avesse footer).
+  function makeFloating() {
+    if (document.getElementById("pwa-install-float")) return;
+    var b = makeLink();
+    b.id = "pwa-install-float";
+    b.style.cssText = [
       "position:fixed", "right:16px", "bottom:16px", "z-index:9999",
-      "padding:11px 16px", "border:0", "border-radius:999px",
+      "margin:0", "padding:11px 16px", "border:0", "border-radius:999px",
       "background:#4f8cff", "color:#fff",
       "font:600 14px/1 -apple-system,Segoe UI,Roboto,sans-serif",
       "box-shadow:0 8px 24px rgba(0,0,0,.35)", "cursor:pointer"
     ].join(";");
-    b.onclick = function () {
-      if (deferred) {
-        deferred.prompt();
-        deferred.userChoice.finally(function () { deferred = null; });
-      } else {
-        overlay(istruzioni());
-      }
-    };
     document.body.appendChild(b);
-    return b;
   }
 
   window.addEventListener("beforeinstallprompt", function (e) {
@@ -87,12 +100,19 @@
   });
 
   window.addEventListener("appinstalled", function () {
-    var b = document.getElementById("pwa-install");
-    if (b) b.style.display = "none";
+    document.querySelectorAll(".pwa-install, #pwa-install-float").forEach(function (b) {
+      b.style.display = "none";
+    });
   });
 
-  // Mostra il bottone sempre (tranne se l'app è già installata).
+  // Inserisce il link "Installa l'app" nel/i footer (sempre, tranne se già installata).
   document.addEventListener("DOMContentLoaded", function () {
-    if (!isStandalone()) makeBtn();
+    if (isStandalone()) return;
+    var footers = document.querySelectorAll("footer");
+    if (footers.length) {
+      footers.forEach(function (f) { f.appendChild(makeLink()); });
+    } else {
+      makeFloating();
+    }
   });
 })();
