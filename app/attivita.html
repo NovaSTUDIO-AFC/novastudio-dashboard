@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Da fare — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .todo-add { display:flex; gap:8px; margin:.4rem 0 1rem; }
+    .todo-add input { flex:1; padding:11px 12px; background:#0e1622; border:1px solid #243049;
+      border-radius:10px; color:#e7edf6; font-size:15px; outline:none; }
+    .todo-add input:focus { border-color:#4f8cff; }
+    .todo-add button { padding:11px 16px; border:0; border-radius:10px; background:#4f8cff;
+      color:#fff; font-weight:600; cursor:pointer; }
+    ul.todo { list-style:none; margin:0; padding:0; }
+    ul.todo li { display:flex; align-items:flex-start; gap:10px; padding:11px 12px; margin-bottom:8px;
+      background:#121a28; border:1px solid #243049; border-radius:10px; }
+    ul.todo li.fatta .txt { text-decoration:line-through; opacity:.55; }
+    ul.todo .chk { margin-top:2px; width:18px; height:18px; cursor:pointer; flex:0 0 auto; }
+    ul.todo .txt { flex:1; line-height:1.45; word-break:break-word; }
+    ul.todo .del { background:transparent; border:0; color:#8aa0bd; cursor:pointer; font-size:16px;
+      padding:0 4px; }
+    ul.todo .del:hover { color:#ff6b81; }
+    .todo-vuoto { color:#8aa0bd; font-size:14px; padding:8px 2px; }
+    .todo-meta { color:#8aa0bd; font-size:12px; margin-top:2px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Da fare</h1>
+        <div class="sub">Le attività del progetto. Spuntale quando le fai, eliminale quando non servono.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="todo-conta">—</span></span>
+    </header>
+
+    <section>
+      <form class="todo-add" id="todo-add" autocomplete="off">
+        <input id="todo-input" type="text" placeholder="Aggiungi un'attività e premi Invio…" maxlength="500" />
+        <button type="submit">Aggiungi</button>
+      </form>
+      <ul class="todo" id="lista-attivita"></ul>
+    </section>
+
+    <footer>Le attività vivono nello store (stato volatile), non nel codice · la dashboard le disegna.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/attivita-dati.js"></script>
+  <script src="assets/attivita.js"></script>
+</body>
+</html>

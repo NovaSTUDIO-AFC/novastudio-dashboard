@@ -18,6 +18,7 @@ $CONFIG = require (getenv('NOVA_CONFIG') ?: __DIR__ . '/config.php');
 require_once __DIR__ . '/lib/db.php';
 require_once __DIR__ . '/lib/users.php';
 require_once __DIR__ . '/lib/reset.php';
+require_once __DIR__ . '/lib/attivita.php';
 
 // ── Sessione sicura ────────────────────────────────────────────
 $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
@@ -35,6 +36,7 @@ session_start();
 
 // Migra il login attuale di Fabio come primo admin (gira una volta sola).
 nova_seed_admin($CONFIG);
+nova_attivita_seed();  // popola "Da fare" con gli item aperti, se vuota
 $MULTIUSER = nova_db() !== null;
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -405,6 +407,22 @@ if ($action === 'admin' || strpos((string)$action, 'admin_') === 0) {
   exit;
 }
 
+// ── Azioni "Da fare" (qualsiasi utente loggato) → JSON ─────────
+if (strpos((string)$action, 'task_') === 0) {
+  header('Content-Type: application/json; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !csrf_ok()) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'err' => 'richiesta non valida']);
+    exit;
+  }
+  if ($action === 'task_add')         nova_attivita_aggiungi((string)($_POST['testo'] ?? ''));
+  elseif ($action === 'task_toggle')  nova_attivita_toggle((int)($_POST['id'] ?? 0));
+  elseif ($action === 'task_del')     nova_attivita_elimina((int)($_POST['id'] ?? 0));
+  echo json_encode(['ok' => true, 'items' => nova_attivita_lista()], JSON_UNESCAPED_UNICODE);
+  exit;
+}
+
 // $rel è già stato calcolato sopra con file_richiesto().
 
 // ── Endpoint dinamico: permessi dell'utente per il front-end ───
@@ -416,6 +434,17 @@ if ($rel === 'assets/permessi.js') {
     'isAdmin' => !empty($ME['is_admin']),
     'sezioni' => nova_sezioni_utente($ME),
   ], JSON_UNESCAPED_SLASHES) . ";\n";
+  exit;
+}
+
+// ── Endpoint dinamico: dati "Da fare" + csrf per il front-end ──
+if ($rel === 'assets/attivita-dati.js') {
+  header('Content-Type: application/javascript; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  echo 'window.ATTIVITA = ' . json_encode([
+    'csrf'  => csrf_token(),
+    'items' => nova_attivita_lista(),
+  ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n";
   exit;
 }
 

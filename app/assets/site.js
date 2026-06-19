@@ -7,6 +7,7 @@
 // Voci del menu. `sez` = sezione soggetta a permesso; senza `sez` è sempre visibile.
 const NAV = [
   { label: "Home",           href: "index.html",          icon: "🏠" },
+  { label: "Da fare",        href: "attivita.html",       icon: "✅" },
   { label: "Infrastruttura", href: "infrastruttura.html", icon: "🗺️", sez: "infrastruttura" },
   { label: "Sistema",        href: "sistema.html",        icon: "🧩", sez: "sistema" },
   { label: "Posta",          href: "posta.html",          icon: "📬", sez: "posta" },
@@ -23,6 +24,13 @@ function puoVedere(sez) {
 
 // Aree del progetto NovaSTUDIO mostrate in homepage
 const AREE = [
+  {
+    titolo: "Da fare",
+    desc: "Le attività del progetto: aggiungi, spunta quando fatte, elimina quando non servono.",
+    href: "attivita.html",
+    icon: "✅",
+    stato: "attiva",
+  },
   {
     titolo: "Infrastruttura",
     desc: "Mappa della rete Tailscale, macchine, servizi attivi e scorciatoie.",

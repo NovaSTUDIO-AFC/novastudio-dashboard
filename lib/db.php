@@ -57,4 +57,14 @@ function nova_db_init(PDO $pdo): void {
     creato_il  INTEGER NOT NULL
   )');
   $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reset_hash ON reset_token(token_hash)');
+
+  // Attività / "Da fare": stato VOLATILE (si aggiunge e si spunta) → vive qui
+  // nello store, NON in git. La dashboard la disegna come fa col catalogo.
+  $pdo->exec('CREATE TABLE IF NOT EXISTS attivita (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    testo     TEXT    NOT NULL,
+    fatta     INTEGER NOT NULL DEFAULT 0,
+    creata_il INTEGER NOT NULL,
+    fatta_il  INTEGER
+  )');
 }

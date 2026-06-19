@@ -59,6 +59,16 @@ for s in sistema posta automazioni infrastruttura; do
   ck "admin GET $s.html = 200" '[[ "'"$C"'" == "200" ]]'
 done
 
+echo "== Da fare (attività) =="
+ck "attivita.html = 200" '[[ "$(curl -s -o /dev/null -w "%{http_code}" -b "$JAR" "$BASE/attivita.html")" == "200" ]]'
+AD=$(curl -s -b "$JAR" "$BASE/assets/attivita-dati.js")
+ck "attivita-dati.js espone window.ATTIVITA" '[[ "$AD" == *"window.ATTIVITA"* ]]'
+ck "seed iniziale presente (PR)" '[[ "$AD" == *"Aprire la PR"* ]]'
+ATCSRF=$(curl -s -b "$JAR" "$BASE/assets/permessi.js" >/dev/null; echo "$AD" | sed -E 's/.*"csrf":"([a-f0-9]+)".*/\1/')
+ADDR=$(curl -s -b "$JAR" --data-urlencode "csrf=$ATCSRF" --data-urlencode "testo=task di prova xyz" "$BASE/?action=task_add")
+ck "task_add → ok + item presente" '[[ "$ADDR" == *"\"ok\":true"* && "$ADDR" == *"task di prova xyz"* ]]'
+ck "task_add senza csrf → rifiutato" '[[ "$(curl -s --data-urlencode "testo=no" -b "$JAR" "$BASE/?action=task_add")" == *"\"ok\":false"* ]]'
+
 echo "== pannello admin: crea utente limitato =="
 AT=$(curl -s -b "$JAR" "$BASE/?action=admin" | csrf)
 CRE=$(curl -s -b "$JAR" --data-urlencode "csrf=$AT" \
