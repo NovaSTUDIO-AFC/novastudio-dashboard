@@ -26,13 +26,23 @@ ASSET="$DIR/app/assets/stato-osservato.js"
 
 [ -f "$STATO_OSS" ] || { echo "stato osservato assente: $STATO_OSS" >&2; exit 0; }
 
-# rigenera l'asset come window.STATO_OSSERVATO (stesso formato del deploy)
+# rigenera l'asset MISURATO (window.STATO_OSSERVATO) e il DESIDERATO (window.CATALOGO),
+# così la dashboard mostra sia lo stato vivo sia ogni nuova dichiarazione (es. una nuova
+# automazione) entro 10 min, senza aspettare un deploy completo.
 printf 'window.STATO_OSSERVATO = %s;\n' "$(cat "$STATO_OSS")" > "$ASSET"
 
-# pubblica SOLO quel file
+HUB_CAT="$HOME/Workspace/progetti/hub/sistema/catalogo.json"
+ASSET_CAT="$DIR/app/assets/catalogo.js"
+FILES=("$ASSET")
+if [ -f "$HUB_CAT" ]; then
+  printf 'window.CATALOGO = %s;\n' "$(cat "$HUB_CAT")" > "$ASSET_CAT"
+  FILES+=("$ASSET_CAT")
+fi
+
+# pubblica i file dati (stato osservato + catalogo), niente altro
 rsync -az --timeout=30 \
   -e "ssh -i ${SSH_KEY} -o IdentitiesOnly=yes -o ConnectTimeout=15 -p ${SSH_PORT}" \
-  "$ASSET" \
-  "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/app/assets/stato-osservato.js"
+  "${FILES[@]}" \
+  "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/app/assets/"
 
-echo "pubblicato stato-osservato.js → dashboard ($(date -u +%FT%TZ))"
+echo "pubblicato stato-osservato.js + catalogo.js → dashboard ($(date -u +%FT%TZ))"
