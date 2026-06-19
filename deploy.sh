@@ -51,6 +51,11 @@ rsync -avz --human-readable \
   --exclude 'deploy.sh' \
   --exclude 'config.sample.php' \
   --exclude 'data/throttle.json' \
+  --exclude 'data/forgot.json' \
+  --exclude 'data/users.db' \
+  --exclude 'data/users.db-wal' \
+  --exclude 'data/users.db-shm' \
+  --exclude '_test/' \
   "${LOCAL_DIR}" "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/"
 
 echo "✅ Deploy completato → https://novastudio.company/dashboard/"

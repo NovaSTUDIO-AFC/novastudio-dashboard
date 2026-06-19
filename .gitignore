@@ -3,6 +3,12 @@ config.php
 
 # === Stato volatile del server ===
 data/throttle.json
+data/forgot.json
+
+# === Store utenti (SQLite) — vive solo sul server, MAI nel repo né nel deploy ===
+data/users.db
+data/users.db-wal
+data/users.db-shm
 
 # === File generati dal deploy (sincronizzati da hub / stato osservato) ===
 app/assets/catalogo.js

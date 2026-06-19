@@ -4,15 +4,22 @@
 // un'area del progetto in futuro, modifica gli array qui sotto.
 // ───────────────────────────────────────────────────────────────
 
-// Voci del menu
+// Voci del menu. `sez` = sezione soggetta a permesso; senza `sez` è sempre visibile.
 const NAV = [
   { label: "Home",           href: "index.html",          icon: "🏠" },
-  { label: "Infrastruttura", href: "infrastruttura.html", icon: "🗺️" },
-  { label: "Sistema",        href: "sistema.html",        icon: "🧩" },
-  { label: "Posta",          href: "posta.html",          icon: "📬" },
-  { label: "Automazioni",    href: "automazioni.html",    icon: "⚙️" },
+  { label: "Infrastruttura", href: "infrastruttura.html", icon: "🗺️", sez: "infrastruttura" },
+  { label: "Sistema",        href: "sistema.html",        icon: "🧩", sez: "sistema" },
+  { label: "Posta",          href: "posta.html",          icon: "📬", sez: "posta" },
+  { label: "Automazioni",    href: "automazioni.html",    icon: "⚙️", sez: "automazioni" },
   { label: "Guida AI",       href: "guida-ai.html",       icon: "📘" },
 ];
+
+// Permessi dell'utente, iniettati server-side da assets/permessi.js.
+// Default permissivo (admin) per non rompere se l'endpoint manca.
+const PERM = window.PERMESSI || { isAdmin: true, sezioni: [], email: "" };
+function puoVedere(sez) {
+  return !sez || PERM.isAdmin || (PERM.sezioni || []).indexOf(sez) !== -1;
+}
 
 // Aree del progetto NovaSTUDIO mostrate in homepage
 const AREE = [
@@ -22,6 +29,7 @@ const AREE = [
     href: "infrastruttura.html",
     icon: "🗺️",
     stato: "attiva",
+    sez: "infrastruttura",
   },
   {
     titolo: "Sistema",
@@ -29,6 +37,7 @@ const AREE = [
     href: "sistema.html",
     icon: "🧩",
     stato: "attiva",
+    sez: "sistema",
   },
   {
     titolo: "Posta",
@@ -36,6 +45,7 @@ const AREE = [
     href: "posta.html",
     icon: "📬",
     stato: "attiva",
+    sez: "posta",
   },
   {
     titolo: "Automazioni",
@@ -43,6 +53,7 @@ const AREE = [
     href: "automazioni.html",
     icon: "⚙️",
     stato: "attiva",
+    sez: "automazioni",
   },
   {
     titolo: "Guida AI",
@@ -62,16 +73,20 @@ function renderNav() {
   if (!host) return;
 
   const current = location.pathname.split("/").pop() || "index.html";
-  const links = NAV.map((n) => {
+  const links = NAV.filter((n) => puoVedere(n.sez)).map((n) => {
     const active = n.href === current ? " active" : "";
     return `<a class="nav-link${active}" href="${n.href}">${n.icon} ${n.label}</a>`;
   }).join("");
+
+  const adminLink = PERM.isAdmin
+    ? `<a class="nav-link" href="?action=admin">👤 Utenti</a>`
+    : "";
 
   host.innerHTML = `
     <div class="nav-inner">
       <a class="brand" href="index.html">◆ NovaSTUDIO</a>
       <button id="nav-toggle" class="nav-toggle" aria-label="Menu">☰</button>
-      <nav id="nav-links" class="nav-links">${links}
+      <nav id="nav-links" class="nav-links">${links}${adminLink}
         <a class="nav-link nav-logout" href="?action=logout">🚪 Esci</a>
       </nav>
     </div>`;
@@ -86,7 +101,7 @@ function renderAree() {
   const host = document.getElementById("aree");
   if (!host) return;
 
-  host.innerHTML = AREE.map((a) => {
+  host.innerHTML = AREE.filter((a) => puoVedere(a.sez)).map((a) => {
     const placeholder = !a.href;
     const tag = `<span class="area-tag ${placeholder ? "soon" : ""}">${a.stato}</span>`;
     const inner = `
