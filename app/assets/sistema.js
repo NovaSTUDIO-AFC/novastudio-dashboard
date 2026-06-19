@@ -38,13 +38,16 @@ function tagStato(s) {
       <div class="ic">🔌</div>
       <div>
         <div class="nm">${c.nome}</div>
-        ${tagStato(c.stato)}
+        ${tagStato(c.stato)} ${typeof badgeOsservato === "function" ? badgeOsservato(c.nome) : ""}
       </div>
     </div>`).join("");
 
   const ok = conn.filter((c) => classeStato(c.stato) === "ok").length;
   const cc = document.getElementById("conn-count");
-  if (cc) cc.textContent = `${ok}/${conn.length} connettori attivi`;
+  if (cc) {
+    const nota = typeof notaOsservato === "function" ? ` · ${notaOsservato()}` : "";
+    cc.textContent = `${ok}/${conn.length} connettori attivi${nota}`;
+  }
   const cd = document.getElementById("cat-data");
   if (cd && C.meta) cd.textContent = `aggiornato ${C.meta.aggiornato || ""}`;
 })();

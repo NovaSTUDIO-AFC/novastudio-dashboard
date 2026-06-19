@@ -4,8 +4,9 @@ config.php
 # === Stato volatile del server ===
 data/throttle.json
 
-# === File generato dal deploy (sincronizzato da hub/sistema/catalogo.json) ===
+# === File generati dal deploy (sincronizzati da hub / stato osservato) ===
 app/assets/catalogo.js
+app/assets/stato-osservato.js
 
 # === Sistema ===
 .DS_Store

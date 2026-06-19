@@ -21,9 +21,21 @@ LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)/"
 HUB_CATALOGO="$HOME/Workspace/progetti/hub/sistema/catalogo.json"
 if [ -f "$HUB_CATALOGO" ]; then
   printf 'window.CATALOGO = %s;\n' "$(cat "$HUB_CATALOGO")" > "${LOCAL_DIR}app/assets/catalogo.js"
-  echo "→ catalogo sincronizzato da hub ($HUB_CATALOGO)"
+  echo "→ catalogo (desiderato) sincronizzato da hub ($HUB_CATALOGO)"
 else
   echo "⚠️  catalogo non trovato in $HUB_CATALOGO — uso il catalogo.js esistente"
+fi
+
+# ── Sincronizza lo STATO OSSERVATO (misurato dall'osservatore) ──
+# Il catalogo è il "desiderato"; questo è ciò che è DAVVERO vivo adesso. Vive
+# fuori dal repo (sul Mac mini); lo pubblichiamo come window.STATO_OSSERVATO.
+STATO_OSS="$HOME/.local/state/novastudio/stato-osservato.json"
+if [ -f "$STATO_OSS" ]; then
+  printf 'window.STATO_OSSERVATO = %s;\n' "$(cat "$STATO_OSS")" > "${LOCAL_DIR}app/assets/stato-osservato.js"
+  echo "→ stato osservato (misurato) sincronizzato ($STATO_OSS)"
+else
+  echo "⚠️  stato osservato non trovato — la dashboard mostrerà solo il dichiarato"
+  printf 'window.STATO_OSSERVATO = {"entita":[],"generato_il":null};\n' > "${LOCAL_DIR}app/assets/stato-osservato.js"
 fi
 
 echo "→ Deploy verso ${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}"

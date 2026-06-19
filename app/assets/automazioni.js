@@ -25,14 +25,15 @@ function tagStato(s) {
         <div class="d">reparto: ${a.reparto || "—"}</div>
         <div class="d">⏰ ${a.quando} · 🖥️ ${a.dove_gira}</div>
         <div class="d">📈 ${a.monitoraggio || "—"}</div>
-        ${tagStato(a.stato)}
+        ${tagStato(a.stato)} ${typeof badgeOsservato === "function" ? badgeOsservato(a.id) : ""}
       </div>
     </div>`).join("");
 
   const ac = document.getElementById("auto-count");
   if (ac) {
     const attive = auto.filter((a) => classeStato(a.stato) === "ok").length;
-    ac.textContent = `${attive}/${auto.length} attive`;
+    const nota = typeof notaOsservato === "function" ? ` · ${notaOsservato()}` : "";
+    ac.textContent = `${attive}/${auto.length} attive${nota}`;
   }
   const cd = document.getElementById("cat-data");
   if (cd && C.meta) cd.textContent = `aggiornato ${C.meta.aggiornato || ""}`;
