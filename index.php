@@ -172,6 +172,63 @@ function csrf_ok(): bool {
   return hash_equals($_SESSION['csrf'] ?? '', (string)($_POST['csrf'] ?? ''));
 }
 
+// Calcola il file richiesto (relativo a app/) dalla URL.
+function file_richiesto(): string {
+  $base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'); // es. /dashboard
+  $uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
+  $rel  = urldecode((string)$uri);
+  if ($base !== '' && strpos($rel, $base) === 0) $rel = substr($rel, strlen($base));
+  $rel = ltrim($rel, '/');
+  if ($rel === '' || substr($rel, -1) === '/') $rel .= 'index.html';
+  return $rel;
+}
+
+// Serve un file da app/ con MIME e header di sicurezza corretti (poi esce).
+function serve_app_file(string $rel): void {
+  if (strpos($rel, '..') !== false || strpos($rel, "\0") !== false) {
+    http_response_code(400); exit('Bad request');
+  }
+  $appDir = __DIR__ . '/app';
+  $full   = realpath($appDir . '/' . $rel);
+  if ($full === false || strpos($full, realpath($appDir)) !== 0 || !is_file($full)) {
+    http_response_code(404); echo '<h1>404</h1>'; exit;
+  }
+  $ext = strtolower(pathinfo($full, PATHINFO_EXTENSION));
+  $mimes = [
+    'html' => 'text/html; charset=utf-8',
+    'js'   => 'application/javascript; charset=utf-8',
+    'css'  => 'text/css; charset=utf-8',
+    'svg'  => 'image/svg+xml',
+    'png'  => 'image/png',
+    'jpg'  => 'image/jpeg', 'jpeg' => 'image/jpeg',
+    'webp' => 'image/webp',
+    'ico'  => 'image/x-icon',
+    'json' => 'application/json; charset=utf-8',
+    'webmanifest' => 'application/manifest+json; charset=utf-8',
+    'woff2'=> 'font/woff2', 'woff' => 'font/woff',
+  ];
+  header('Content-Type: ' . ($mimes[$ext] ?? 'application/octet-stream'));
+  header('X-Content-Type-Options: nosniff');
+  header('X-Frame-Options: DENY');
+  header('Referrer-Policy: no-referrer');
+  // SW e manifest devono poter essere rivalidati; il resto privato.
+  if ($rel === 'sw.js' || $ext === 'webmanifest') {
+    header('Cache-Control: public, max-age=0, must-revalidate');
+  } else {
+    header('Cache-Control: private, no-store');
+  }
+  readfile($full);
+  exit;
+}
+
+// Asset PWA serviti SENZA login (nessun dato sensibile): così manifest e
+// service worker sono raggiungibili anche dalla pagina di accesso e l'app
+// risulta installabile a prescindere dallo stato di sessione.
+const NOVA_ASSET_PUBBLICI = [
+  'manifest.webmanifest', 'sw.js', 'assets/pwa.js',
+  'assets/icon-192.png', 'assets/icon-512.png', 'assets/icon-maskable-512.png',
+];
+
 // ── Routing ────────────────────────────────────────────────────
 $action = $_GET['action'] ?? '';
 
@@ -282,6 +339,12 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
+// ── Asset PWA pubblici (prima del cancello di login) ───────────
+$rel = file_richiesto();
+if (in_array($rel, NOVA_ASSET_PUBBLICI, true)) {
+  serve_app_file($rel);
+}
+
 // ── Non autenticato → mostra login ─────────────────────────────
 if (!is_authed($CONFIG)) {
   http_response_code($action === 'login' ? 401 : 200);
@@ -342,20 +405,7 @@ if ($action === 'admin' || strpos((string)$action, 'admin_') === 0) {
   exit;
 }
 
-// ── Calcolo del file richiesto da app/ ─────────────────────────
-$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'); // es. /dashboard
-$uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
-$rel  = urldecode((string)$uri);
-if ($base !== '' && strpos($rel, $base) === 0) {
-  $rel = substr($rel, strlen($base));
-}
-$rel = ltrim($rel, '/');
-if ($rel === '' || substr($rel, -1) === '/') $rel .= 'index.html';
-
-// blocca path traversal
-if (strpos($rel, '..') !== false || strpos($rel, "\0") !== false) {
-  http_response_code(400); exit('Bad request');
-}
+// $rel è già stato calcolato sopra con file_richiesto().
 
 // ── Endpoint dinamico: permessi dell'utente per il front-end ───
 if ($rel === 'assets/permessi.js') {
@@ -377,37 +427,4 @@ if ($sezione !== null && !nova_puo($ME, $sezione)) {
 }
 
 // ── Servi il file richiesto da app/ ────────────────────────────
-$appDir = __DIR__ . '/app';
-$full   = realpath($appDir . '/' . $rel);
-
-if ($full === false || strpos($full, realpath($appDir)) !== 0 || !is_file($full)) {
-  http_response_code(404);
-  echo '<h1>404</h1>';
-  exit;
-}
-
-$ext = strtolower(pathinfo($full, PATHINFO_EXTENSION));
-$mimes = [
-  'html' => 'text/html; charset=utf-8',
-  'js'   => 'application/javascript; charset=utf-8',
-  'css'  => 'text/css; charset=utf-8',
-  'svg'  => 'image/svg+xml',
-  'png'  => 'image/png',
-  'jpg'  => 'image/jpeg', 'jpeg' => 'image/jpeg',
-  'webp' => 'image/webp',
-  'ico'  => 'image/x-icon',
-  'json' => 'application/json; charset=utf-8',
-  'webmanifest' => 'application/manifest+json; charset=utf-8',
-  'woff2'=> 'font/woff2', 'woff' => 'font/woff',
-];
-header('Content-Type: ' . ($mimes[$ext] ?? 'application/octet-stream'));
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
-header('Referrer-Policy: no-referrer');
-// Il service worker e il manifest devono poter essere riletti.
-if ($rel === 'sw.js' || $ext === 'webmanifest') {
-  header('Cache-Control: private, no-cache');
-} else {
-  header('Cache-Control: private, no-store');
-}
-readfile($full);
+serve_app_file($rel);

@@ -30,6 +30,18 @@ ck "campo email presente"  '[[ "$HOME_OUT" == *"name=\"email\""* ]]'
 ck "link password dimenticata" '[[ "$HOME_OUT" == *"action=forgot"* ]]'
 T=$(echo "$HOME_OUT" | csrf)
 
+echo "== Asset PWA pubblici (senza login) =="
+CTM=$(curl -s -o /dev/null -w '%{http_code}|%{content_type}' "$BASE/manifest.webmanifest")
+ck "manifest pubblico = 200 + manifest+json" '[[ "$CTM" == 200*manifest+json* ]]'
+CTS=$(curl -s -o /dev/null -w '%{http_code}|%{content_type}' "$BASE/sw.js")
+ck "sw.js pubblico = 200 + javascript" '[[ "$CTS" == 200*javascript* ]]'
+CTP=$(curl -s -o /dev/null -w '%{http_code}|%{content_type}' "$BASE/assets/pwa.js")
+ck "pwa.js pubblico = 200 + javascript" '[[ "$CTP" == 200*javascript* ]]'
+CTI=$(curl -s -o /dev/null -w '%{http_code}|%{content_type}' "$BASE/assets/icon-192.png")
+ck "icona pubblica = 200 + png" '[[ "$CTI" == 200*image/png* ]]'
+# Un asset NON pubblico resta protetto:
+ck "catalogo.js senza login → login (no leak)" 'curl -s "$BASE/assets/catalogo.js" | grep -q "Area riservata"'
+
 echo "== Login admin =="
 CODE=$(curl -s -o /dev/null -w '%{http_code}' -b "$JAR" -c "$JAR" \
   --data-urlencode "email=info@afciaccio.it" --data-urlencode "password=TestPass123" \
