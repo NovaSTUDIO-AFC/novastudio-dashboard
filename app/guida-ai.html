@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Guida AI — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* Stili minimi locali alla pagina-guida (riusa la palette via colori neutri) */
+    .guida ol, .guida ul { margin: .4rem 0 .2rem 1.2rem; padding: 0; }
+    .guida li { margin: .35rem 0; line-height: 1.5; }
+    .guida .card { padding: 1rem 1.1rem; }
+    .guida .card h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+    .guida code { background: rgba(127,127,127,.16); padding: .05rem .35rem; border-radius: 4px; }
+    .guida .note { font-size: .9rem; opacity: .8; }
+    .guida .regola { margin: .5rem 0; }
+    .guida .regola b { display: block; }
+    .step { display: flex; gap: .7rem; align-items: flex-start; margin: .6rem 0; }
+    .step .n { flex: 0 0 auto; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+               background: rgba(127,127,127,.18); display: grid; place-items: center;
+               font-weight: 700; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap guida">
+    <header class="top">
+      <div>
+        <h1>Guida AI — come si crea</h1>
+        <div class="sub">Le regole da seguire <b>ogni volta</b> che crei un agente, un'automazione o una funzione con Claude&nbsp;Code, Codex, openclaw o altri.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> riferimento vivo</span>
+    </header>
+
+    <!-- ───────────────────────── PRIMA DI INIZIARE ───────────────────────── -->
+    <section>
+      <h2>0 · Prima di iniziare — sempre</h2>
+      <div class="card">
+        <div class="step"><div class="n">1</div><div><code>git fetch</code> e leggi <code>sistema/catalogo.json</code>: è lo <b>stato reale</b> del sistema. Niente è "fatto" finché non è registrato lì.</div></div>
+        <div class="step"><div class="n">2</div><div>Apri <code>RIPRENDI-DA-QUI.md</code> (punto d'ingresso) e <code>knowledge/come-lavoriamo.md</code> (come si collabora + lezioni).</div></div>
+        <div class="step"><div class="n">3</div><div>Lo <b>stato vivo</b> si legge da <code>~/.local/state/novastudio/stato-osservato.json</code> (misurato), <b>non</b> dai campi <code>stato</code> del catalogo (che sono il <i>desiderato</i>).</div></div>
+        <div class="step"><div class="n">4</div><div>Lavora su un <b>branch</b> e apri una <b>Pull Request</b>. Git contiene solo <b>comportamento</b> (codice/config), mai stato volatile o segreti.</div></div>
+        <div class="step"><div class="n">5</div><div>Parti dal template giusto in <code>_templates/</code> e compila <b>tutti</b> i campi prima di scrivere codice.</div></div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── I TRE FLUSSI ───────────────────────── -->
+    <section>
+      <h2>1 · Cosa stai creando?</h2>
+      <div class="grid-cards">
+
+        <div class="card">
+          <h3>🤖 Nuovo agente</h3>
+          <div class="note">Template: <code>_templates/agente.md</code></div>
+          <ul>
+            <li><b>Scopo</b>: una frase.</li>
+            <li><b>Input / Output</b>: dati <b>strutturati</b> (JSON / proprietà Notion), non testo libero. L'estetica solo a fine pipeline.</li>
+            <li><b>Contratto I/O</b>: schema preciso dei campi in ingresso e uscita.</li>
+            <li><b>Strumenti/MCP</b>: lista minima (privilegio minimo).</li>
+            <li><b>Modello</b>: locale&#8209;3B | Claude | Codex | Gemini + motivo (costo/qualità).</li>
+            <li><b>Guardrail</b>: cosa NON deve fare; cosa richiede approvazione umana.</li>
+            <li><b>Verifica</b>: checklist "è funzionante", punto per punto.</li>
+            <li><b>Stato</b>: bozza | verificato | automatizzato.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>⚙️ Nuova automazione</h3>
+          <div class="note">Template: <code>_templates/automazione.md</code></div>
+          <ul>
+            <li><b>Trigger</b>: schedulata (cron/launchd) o evento.</li>
+            <li><b>Passi</b>: sequenza deterministica, punto per punto.</li>
+            <li><b>Idempotenza</b>: sicura se gira due volte. Usa <code>sistema/lib/statostore.py</code> — <code>acquire_lock()</code> + <code>with_idempotency(key=…)</code> (vedi ADR&#8209;0004).</li>
+            <li><b>Approvazioni</b>: es. invio newsletter = sì.</li>
+            <li><b>Monitoraggio</b>: check Healthchecks (start / successo / fail).</li>
+            <li><b>Fallback/alert</b>: cosa fare in caso di errore.</li>
+            <li><b>Stato</b>: bozza | verificato | attivo.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🧩 Nuova funzione</h3>
+          <div class="note">Codice nel reparto/sistema giusto</div>
+          <ul>
+            <li><b>Dove va</b>: segui <code>knowledge/struttura.md</code> (la mappa di dove sta ogni cosa).</li>
+            <li><b>Contratto</b>: input/output strutturati, niente effetti collaterali nascosti.</li>
+            <li><b>Segreti</b>: letti da <code>~/.config/novastudio/secrets.env</code>, mai hardcoded.</li>
+            <li><b>Verifica</b>: gira <code>sistema/verifica.sh</code> — deve restare verde.</li>
+            <li><b>Registrazione</b>: aggiungi la voce a <code>sistema/catalogo.json</code>.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ───────────────────────── REGOLE NON NEGOZIABILI ───────────────────────── -->
+    <section>
+      <h2>2 · Regole non negoziabili</h2>
+      <div class="card">
+        <div class="regola"><b>Fonte di verità = il repo hub.</b> A inizio sessione <code>git fetch</code> + leggi il catalogo. Anti-deriva: niente è "fatto" finché non è nel catalogo.</div>
+        <div class="regola"><b>MAI affermare con sicurezza stati non verificati</b> — soprattutto remoti (cosa c'è su GitHub, su un server, in un'altra sessione). Se non puoi verificarlo, <b>dillo</b> invece di indovinare.</div>
+        <div class="regola"><b>Segreti</b> sempre in <code>~/.config/novastudio/secrets.env</code> (permessi 600), mai nel repo. Nel catalogo vanno solo i <i>nomi</i> dei segreti.</div>
+        <div class="regola"><b>Approvazione esplicita di Fabio</b> per: deploy sul sito live, push su GitHub, installare automazioni persistenti (launchd/cron), azioni esterne/irreversibili. Un "procedi" generico <b>non</b> basta per un deploy live.</div>
+        <div class="regola"><b>Privilegio minimo</b>: dai a ogni agente solo gli strumenti/MCP che gli servono.</div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── GOTCHA TECNICI ───────────────────────── -->
+    <section>
+      <h2>3 · Gotcha tecnici (fanno perdere tempo se non li sai)</h2>
+      <div class="card">
+        <ul>
+          <li><b>Input interattivo NON funziona dentro Claude Code</b> (nemmeno col prefisso <code>!</code>): niente <code>gh auth login</code>, <code>read -s</code>, login OAuth via browser, comandi multilinea. Per un segreto: Fabio incolla il valore e l'agente lo scrive nel file 600, oppure lo digita in un <b>terminale vero</b> separato.</li>
+          <li><b>Accesso git a GitHub</b>: via PAT in <code>secrets.env</code> (<code>GITHUB_TOKEN</code>) + credential helper locale. Il Keychain di macOS spesso non è leggibile da sessione SSH.</li>
+          <li><b>Automazioni headless</b>: <code>claude -p</code> gira da launchd e raggiunge i connettori (Gmail, ecc.). La consegna su Slack però deve usare il <b>bot token</b> (un messaggio via connettore claude.ai risulta "da Fabio" e non notifica).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── DEFINIZIONE DI FATTO ───────────────────────── -->
+    <section>
+      <h2>4 · Definizione di "fatto"</h2>
+      <div class="card">
+        <ol>
+          <li>La verifica passa (<code>sistema/verifica.sh</code> verde; per gli agenti, la checklist "è funzionante").</li>
+          <li>Monitoraggio attivo dove serve (check Healthchecks).</li>
+          <li><b>Registrato nel catalogo</b> (<code>sistema/catalogo.json</code>) con lo stato corretto.</li>
+          <li>Su branch + PR; deploy/push solo dopo il sì esplicito di Fabio.</li>
+        </ol>
+        <div class="note">Finché manca anche solo il punto 3, per il sistema l'oggetto <b>non esiste</b>.</div>
+      </div>
+    </section>
+
+    <footer>Sintesi viva di <code>knowledge/come-lavoriamo.md</code>, <code>_templates/</code> e <code>knowledge/convenzioni.md</code> · aggiorna lì, non qui.</footer>
+  </div>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>

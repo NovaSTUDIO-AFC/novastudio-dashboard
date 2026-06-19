@@ -11,6 +11,7 @@ const NAV = [
   { label: "Sistema",        href: "sistema.html",        icon: "🧩" },
   { label: "Posta",          href: "posta.html",          icon: "📬" },
   { label: "Automazioni",    href: "automazioni.html",    icon: "⚙️" },
+  { label: "Guida AI",       href: "guida-ai.html",       icon: "📘" },
 ];
 
 // Aree del progetto NovaSTUDIO mostrate in homepage
@@ -41,6 +42,13 @@ const AREE = [
     desc: "Tutto ciò che gira da solo: cosa fa, quando, dove e con che stato.",
     href: "automazioni.html",
     icon: "⚙️",
+    stato: "attiva",
+  },
+  {
+    titolo: "Guida AI",
+    desc: "I passi da seguire per creare agenti, automazioni e funzioni ben integrate in NovaSTUDIO.",
+    href: "guida-ai.html",
+    icon: "📘",
     stato: "attiva",
   },
 ];
