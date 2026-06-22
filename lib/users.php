@@ -11,7 +11,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 
 // Sezioni soggette a permesso.
-const NOVA_SEZIONI = ['infrastruttura', 'sistema', 'posta', 'automazioni'];
+const NOVA_SEZIONI = ['infrastruttura', 'sistema', 'posta', 'automazioni', 'mappa'];
 
 // Etichette leggibili (per il pannello admin).
 const NOVA_SEZIONI_LABEL = [
@@ -19,6 +19,7 @@ const NOVA_SEZIONI_LABEL = [
   'sistema'        => 'Sistema',
   'posta'          => 'Posta',
   'automazioni'    => 'Automazioni',
+  'mappa'          => 'Mappa',
 ];
 
 // File richiesto → sezione di appartenenza.
@@ -34,6 +35,9 @@ function nova_sezione_di(string $rel): ?string {
     'assets/posta.js'          => 'posta',
     'automazioni.html'         => 'automazioni',
     'assets/automazioni.js'    => 'automazioni',
+    'mappa.html'               => 'mappa',
+    'assets/mappa.js'          => 'mappa',
+    'assets/mappa-dati.js'     => 'mappa',
   ];
   return $map[$rel] ?? null;
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Mappa — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Mappa</h1>
+        <div class="sub">Tutto ciò che è stato riesumato: i blocchi da accendere, uno alla volta</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="mappa-count">—</span></span>
+    </header>
+
+    <section>
+      <h2>🎯 Blocchi di valore — da trasformare in funzionanti</h2>
+      <div class="sub">Il lavoro non è costruire da zero: è accendere l'ultimo miglio. Uno alla volta, partendo dalla priorità.</div>
+      <div id="blocchi" class="grid-cards"></div>
+    </section>
+
+    <section>
+      <h2>⚙️ Automazioni / job riesumati</h2>
+      <div id="mappa-automazioni" class="grid-cards"></div>
+    </section>
+
+    <section>
+      <h2>🧱 Componenti riusabili (codice vero)</h2>
+      <div id="componenti"></div>
+    </section>
+
+    <section>
+      <h2>💡 Idee / concetti da tenere</h2>
+      <div id="idee"></div>
+    </section>
+
+    <footer>
+      <span id="mappa-data">—</span><br />
+      Dettaglio completo: <code>~/Workspace/INVENTARIO-RIESUMATO.md</code> · <code>automazioni-da-attivare.md</code> · <code>V3-outbound-mappa.md</code>
+    </footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/mappa-dati.js"></script>
+  <script src="assets/mappa.js"></script>
+</body>
+</html>

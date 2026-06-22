@@ -8,6 +8,7 @@
 const NAV = [
   { label: "Home",           href: "index.html",          icon: "🏠" },
   { label: "Da fare",        href: "attivita.html",       icon: "✅" },
+  { label: "Mappa",          href: "mappa.html",          icon: "🗂️", sez: "mappa" },
   { label: "Infrastruttura", href: "infrastruttura.html", icon: "🗺️", sez: "infrastruttura" },
   { label: "Sistema",        href: "sistema.html",        icon: "🧩", sez: "sistema" },
   { label: "Posta",          href: "posta.html",          icon: "📬", sez: "posta" },
@@ -30,6 +31,14 @@ const AREE = [
     href: "attivita.html",
     icon: "✅",
     stato: "attiva",
+  },
+  {
+    titolo: "Mappa",
+    desc: "Tutto ciò che è stato riesumato: i blocchi di valore da accendere uno alla volta, automazioni, componenti e idee.",
+    href: "mappa.html",
+    icon: "🗂️",
+    stato: "attiva",
+    sez: "mappa",
   },
   {
     titolo: "Infrastruttura",
