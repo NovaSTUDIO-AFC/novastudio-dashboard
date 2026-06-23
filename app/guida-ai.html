@@ -55,19 +55,17 @@
       <h2>▶ Come iniziare — per te, Fabio</h2>
 
       <div class="card">
-        <h3>1 · Da dove parti</h3>
+        <h3>1 · Avviare Max e gestire le sessioni</h3>
         <ul>
           <li><b>Tailscale connesso</b> (server raggiungibile).</li>
-          <li><b>Terminale</b> (Warp/Terminale sul Mac): <code>ssh macmini</code> → <code>cd ~/Workspace/progetti/hub</code> → lancia l'AI:
-            <ul>
-              <li><code>claude</code> — Claude Code</li>
-              <li><code>codex</code> — Codex</li>
-              <li><code>openclaw</code> / <code>calw</code> — openclaw</li>
-            </ul>
-          </li>
-          <li><b>Oppure VS Code</b>: Remote&#8209;SSH sul Mac mini (<code>mcode</code>) → apri la cartella <code>~/Workspace/progetti/hub</code>.</li>
+          <li><b>Dal Mac mini</b>: scrivi <code>max</code> → appare il <b>menu delle sessioni</b> vive: entri in una o ne apri una nuova.</li>
+          <li><b>Da MacBook / Windows</b> (Warp): scrivi <code>Max</code> (oppure <code>macmini</code>) → ti collega al Mac mini e apre lo stesso menu.</li>
+          <li>Varianti: <code>max ls</code> (solo elenco) · <code>max &lt;nome&gt;</code> (una precisa) · <code>max new</code> (forza nuova).</li>
+          <li><b>Codex / openclaw</b> (avvio diretto, senza menu sessioni): <code>wcodex</code> · <code>wclaw</code>. &nbsp; <b>VS Code</b>: Remote&#8209;SSH sul Mac mini (<code>mcode</code>).</li>
         </ul>
-        <div class="note">Devi sempre essere <b>dentro <code>~/Workspace/progetti/hub</code></b> (il "cervello" del sistema) prima di lanciare l'AI: è da lì che carica il contesto.</div>
+        <div class="note"><b>⏸ Pausa</b> — la sessione resta viva sul Mac mini, la riprendi dopo da qualsiasi PC: premi <code>F12</code>. &nbsp; <b>⏹ Chiudi davvero</b> — termina e (per Claude) salva la memoria: <code>/exit</code>.</div>
+        <div class="note">Le sessioni girano in <b>tmux</b> sul Mac mini: chiudere la finestra non le spegne, le <b>stacca</b> soltanto (le ritrovi con <code>max</code>).</div>
+        <div class="note">Per lavorare su <b>NovaSTUDIO</b> il "cervello" è <code>~/Workspace/progetti/hub</code>: dentro la sessione fai <code>cd progetti/hub</code> (o di' all'AI di leggere <code>RIPRENDI-DA-QUI.md</code>).</div>
       </div>
 
       <div class="card">
@@ -202,6 +200,11 @@ Poi fermati e aspetta il mio OK per pubblicare.</div>
           <li>✅ branch + PR pronti.</li>
         </ul>
         <div class="note">Solo a quel punto sei <b>tu</b> a dare il via: "pushala su GitHub" e/o "pubblica/deploy". Finché non lo dici, niente esce.</div>
+      </div>
+
+      <div class="card">
+        <h3>3 · Uscire dal terminale</h3>
+        <div class="note"><b>⏸ <code>F12</code></b> = pausa: ti stacca, la sessione resta viva sul Mac mini (la riprendi con <code>max</code> da qualsiasi PC). &nbsp; <b>⏹ <code>/exit</code></b> = chiudi davvero (per Claude fa girare la memoria PAI).</div>
       </div>
     </section>
 
