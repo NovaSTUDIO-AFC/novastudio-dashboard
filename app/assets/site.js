@@ -32,6 +32,9 @@ const TREE = [
           { label: "Raccomandazioni", href: "seo.html",         icon: "💡", sez: "seo", desc: "Azioni di ottimizzazione trovate sul sito live: approva, segna fatto o rifiuta con feedback." },
           { label: "Manuale",         href: "seo-manuale.html", icon: "📖", sez: "seo", desc: "Come è fatto il reparto SEO: ruoli, flusso, Discover e feed Shopping." },
         ]},
+        { label: "Commerciale", icon: "🤝", children: [
+          { label: "Coda prospect", href: "commerciale.html", icon: "✅", sez: "commerciale", desc: "Prospect outbound con email già pronta: approva, chiedi modifiche o rifiuta. Niente parte senza il tuo ok." },
+        ]},
         { label: "Posta", href: "posta.html", icon: "📬", sez: "posta", desc: "Caselle email, agenti del reparto e automazioni della posta." },
       ]},
       { label: "Asset", items: [] }, // libreria foto, ecc. — in arrivo

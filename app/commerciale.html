@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Commerciale — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .cm-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .cm-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 15px; }
+    .cm-card.stato-approvato { border-color:#2e7d51; }
+    .cm-card.stato-modifiche { border-color:#b07a1e; }
+    .cm-card.stato-rifiutato { opacity:.6; }
+    .cm-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .cm-tag { font-size:11px; color:#8aa0bd; border:1px solid #243049; border-radius:999px; padding:2px 9px; }
+    .cm-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .cm-stato.da_approvare { background:#1e2c44; color:#9cc0ff; }
+    .cm-stato.approvato { background:#143524; color:#7fe0a6; }
+    .cm-stato.modifiche { background:#3a2c12; color:#ffce85; }
+    .cm-stato.rifiutato { background:#3a1820; color:#ff9bab; }
+    .cm-azienda { font-size:17px; font-weight:700; line-height:1.35; margin:2px 0 2px; }
+    .cm-email { font-size:13px; color:#9cc0ff; margin-bottom:8px; word-break:break-all; }
+    .cm-email a { color:#9cc0ff; }
+    .cm-subject { font-size:13px; color:#dce6f3; margin:6px 0 2px; }
+    .cm-subject b { color:#8aa0bd; font-weight:600; }
+    .cm-corpo { line-height:1.55; color:#dce6f3; white-space:pre-wrap; background:#0e1622;
+      border:1px solid #243049; border-radius:10px; padding:12px; margin-top:6px; font-size:14px; }
+    .cm-toggle { background:transparent; border:0; color:#4f8cff; cursor:pointer; font-size:13px; padding:6px 0; }
+    .cm-extra { display:none; margin-top:8px; padding-top:10px; border-top:1px dashed #243049; }
+    .cm-extra.open { display:block; }
+    .cm-extra .nota { white-space:pre-wrap; line-height:1.5; color:#9fb1c9; font-size:13px; }
+    .cm-comm { width:100%; box-sizing:border-box; margin-top:10px; padding:10px; min-height:54px;
+      background:#0e1622; border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px;
+      font-family:inherit; resize:vertical; outline:none; }
+    .cm-comm:focus { border-color:#4f8cff; }
+    .cm-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .cm-actions button { padding:9px 14px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; }
+    .b-appr { background:#1f7a4d; color:#fff; }
+    .b-mod  { background:#9a6612; color:#fff; }
+    .b-rif  { background:#7a2330; color:#fff; }
+    .cm-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .cm-aggiornata { font-size:11px; color:#6f859f; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Commerciale</h1>
+        <div class="sub">Coda prospect outbound. Leggi l'email già pronta, approva o chiedi modifiche. Approvato = pronto per l'invio (lo SMTP resta spento finché non lo colleghi: nessuna mail parte senza il tuo ok).</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="cm-conta">—</span></span>
+    </header>
+
+    <section>
+      <ul class="cm-list" id="lista-prospect"></ul>
+    </section>
+
+    <footer>I prospect e i tuoi commenti vivono nello store · il reparto li legge per la rilavorazione · invio email: spento finché non colleghi lo SMTP di fabio@.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/commerciale-dati.js"></script>
+  <script src="assets/commerciale.js"></script>
+</body>
+</html>

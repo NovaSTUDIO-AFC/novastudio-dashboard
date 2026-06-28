@@ -11,7 +11,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 
 // Sezioni soggette a permesso.
-const NOVA_SEZIONI = ['infrastruttura', 'sistema', 'posta', 'automazioni', 'mappa', 'redazione', 'job', 'seo'];
+const NOVA_SEZIONI = ['infrastruttura', 'sistema', 'posta', 'automazioni', 'mappa', 'redazione', 'commerciale', 'job', 'seo', 'sicurezza'];
 
 // Etichette leggibili (per il pannello admin).
 const NOVA_SEZIONI_LABEL = [
@@ -21,8 +21,10 @@ const NOVA_SEZIONI_LABEL = [
   'automazioni'    => 'Automazioni',
   'mappa'          => 'Mappa',
   'redazione'      => 'Redazione',
+  'commerciale'    => 'Commerciale (Reparto)',
   'job'            => 'Job (lavoro)',
   'seo'            => 'SEO (Reparto)',
+  'sicurezza'      => 'Sicurezza (Reparto)',
 ];
 
 // File richiesto → sezione di appartenenza.
@@ -45,6 +47,9 @@ function nova_sezione_di(string $rel): ?string {
     'assets/redazione.js'      => 'redazione',
     'assets/redazione-dati.js' => 'redazione',
     'manuale.html'             => 'redazione',
+    'commerciale.html'         => 'commerciale',
+    'assets/commerciale.js'    => 'commerciale',
+    'assets/commerciale-dati.js' => 'commerciale',
     'job.html'                 => 'job',
     'assets/job.js'            => 'job',
     'assets/job-dati.js'       => 'job',
@@ -55,6 +60,12 @@ function nova_sezione_di(string $rel): ?string {
     'assets/seo.js'            => 'seo',
     'assets/seo-dati.js'       => 'seo',
     'seo-manuale.html'         => 'seo',
+    'sicurezza.html'              => 'sicurezza',
+    'assets/sicurezza.js'         => 'sicurezza',
+    'assets/sicurezza-dati.js'    => 'sicurezza',
+    'sicurezza-manuale.html'      => 'sicurezza',
+    'sicurezza-checklist.html'    => 'sicurezza',
+    'assets/sicurezza-checklist.js' => 'sicurezza',
   ];
   return $map[$rel] ?? null;
 }

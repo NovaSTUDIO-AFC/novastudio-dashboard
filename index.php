@@ -20,8 +20,11 @@ require_once __DIR__ . '/lib/users.php';
 require_once __DIR__ . '/lib/reset.php';
 require_once __DIR__ . '/lib/attivita.php';
 require_once __DIR__ . '/lib/redazione.php';
+require_once __DIR__ . '/lib/commerciale.php';
 require_once __DIR__ . '/lib/job.php';
 require_once __DIR__ . '/lib/seo.php';
+require_once __DIR__ . '/lib/pezzo.php';
+require_once __DIR__ . '/lib/sicurezza.php';
 
 // ── Sessione sicura ────────────────────────────────────────────
 $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
@@ -41,9 +44,11 @@ session_start();
 nova_seed_admin($CONFIG);
 nova_attivita_seed();  // popola "Da fare" con gli item aperti, se vuota
 nova_bozze_seed();     // popola la coda Redazione dal dry-run, se vuota
+nova_prospect_seed();  // popola la coda Commerciale (prospect outbound) dal dry-run, se vuota
 nova_passaggi_seed();  // popola lo storico passaggi (scheda articolo), se vuoto
 nova_job_seed();       // popola le opportunità del reparto Job, se vuoto
 nova_seo_seed();       // popola la coda Reparto SEO dal dry-run, se vuota
+nova_pezzo_seed();     // popola il giunto SEO<->Redazione (pezzi a due gate)
 $MULTIUSER = nova_db() !== null;
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -455,6 +460,31 @@ if (strpos((string)$action, 'appr_') === 0) {
   exit;
 }
 
+// ── Azioni Commerciale (sezione commerciale) → JSON ────────────
+if (strpos((string)$action, 'comm_') === 0) {
+  header('Content-Type: application/json; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  if (!nova_puo($ME, 'commerciale')) {
+    http_response_code(403);
+    echo json_encode(['ok' => false, 'err' => 'forbidden']);
+    exit;
+  }
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !csrf_ok()) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'err' => 'richiesta non valida']);
+    exit;
+  }
+  if ($action === 'comm_set') {
+    nova_prospect_aggiorna(
+      (int)($_POST['id'] ?? 0),
+      (string)($_POST['stato'] ?? ''),
+      (string)($_POST['commento'] ?? '')
+    );
+  }
+  echo json_encode(['ok' => true, 'items' => nova_prospect_lista()], JSON_UNESCAPED_UNICODE);
+  exit;
+}
+
 // ── Azioni Job (sezione job) → JSON ────────────────────────────
 if (strpos((string)$action, 'job_') === 0) {
   header('Content-Type: application/json; charset=utf-8');
@@ -517,6 +547,44 @@ if (strpos((string)$action, 'seo_') === 0) {
   exit;
 }
 
+// ── Azioni Pezzo (giunto SEO<->Redazione, due gate) → JSON ─────
+if (strpos((string)$action, 'pezzo_') === 0) {
+  header('Content-Type: application/json; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  // Il giunto e visibile a chi ha SEO o Redazione. Il singolo gate richiede
+  // il permesso del reparto che lo governa: SEO setta il gate SEO, la
+  // Redazione il gate Rilevanza. Fabio (admin) puo entrambi.
+  $puoSeo = nova_puo($ME, 'seo');
+  $puoRed = nova_puo($ME, 'redazione');
+  if (!$puoSeo && !$puoRed) {
+    http_response_code(403);
+    echo json_encode(['ok' => false, 'err' => 'forbidden']);
+    exit;
+  }
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !csrf_ok()) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'err' => 'richiesta non valida']);
+    exit;
+  }
+  if ($action === 'pezzo_set') {
+    $gate = (string)($_POST['gate'] ?? '');
+    $consentito = ($gate === 'seo' && $puoSeo) || ($gate === 'rilevanza' && $puoRed);
+    if ($consentito) {
+      nova_pezzo_set_gate(
+        (int)($_POST['id'] ?? 0),
+        $gate,
+        (string)($_POST['esito'] ?? ''),
+        (string)($_POST['nota'] ?? '')
+      );
+    }
+  } elseif ($action === 'pezzo_promuovi') {
+    // promozione di un pezzo validato (in_pipeline) → coda approvazioni (bozze).
+    nova_pezzo_promuovi((int)($_POST['id'] ?? 0));
+  }
+  echo json_encode(['ok' => true, 'items' => nova_pezzo_lista()], JSON_UNESCAPED_UNICODE);
+  exit;
+}
+
 // $rel è già stato calcolato sopra con file_richiesto().
 
 // ── Endpoint dinamico: permessi dell'utente per il front-end ───
@@ -559,6 +627,20 @@ if ($rel === 'assets/redazione-dati.js') {
 }
 
 // ── Endpoint dinamico: opportunità Job + feedback + csrf ───────
+if ($rel === 'assets/commerciale-dati.js') {
+  header('Content-Type: application/javascript; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  if (!nova_puo($ME, 'commerciale')) {
+    http_response_code(403);
+    echo "window.COMMERCIALE = { csrf: '', items: [] };\n";
+    exit;
+  }
+  echo 'window.COMMERCIALE = ' . json_encode([
+    'csrf'  => csrf_token(),
+    'items' => nova_prospect_lista(),
+  ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n";
+  exit;
+}
 if ($rel === 'assets/job-dati.js') {
   header('Content-Type: application/javascript; charset=utf-8');
   header('Cache-Control: private, no-store');
@@ -588,6 +670,39 @@ if ($rel === 'assets/seo-dati.js') {
     'csrf'     => csrf_token(),
     'items'    => nova_seo_lista(),
     'feedback' => nova_seo_feedback_lista(),
+  ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n";
+  exit;
+}
+
+// ── Endpoint dinamico: stato Reparto Sicurezza (sola lettura) ──
+if ($rel === 'assets/sicurezza-dati.js') {
+  header('Content-Type: application/javascript; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  if (!nova_puo($ME, 'sicurezza')) {
+    http_response_code(403);
+    echo "window.SICUREZZA = { report: null };\n";
+    exit;
+  }
+  echo 'window.SICUREZZA = ' . json_encode([
+    'report' => nova_sicurezza_report(),
+  ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n";
+  exit;
+}
+
+// ── Endpoint dinamico: giunto SEO<->Redazione (pezzi) + csrf ───
+if ($rel === 'assets/pezzo-dati.js') {
+  header('Content-Type: application/javascript; charset=utf-8');
+  header('Cache-Control: private, no-store');
+  if (!nova_puo($ME, 'seo') && !nova_puo($ME, 'redazione')) {
+    http_response_code(403);
+    echo "window.PEZZI = { csrf: '', items: [], puoSeo:false, puoRil:false };\n";
+    exit;
+  }
+  echo 'window.PEZZI = ' . json_encode([
+    'csrf'   => csrf_token(),
+    'items'  => nova_pezzo_lista(),
+    'puoSeo' => nova_puo($ME, 'seo'),
+    'puoRil' => nova_puo($ME, 'redazione'),
   ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n";
   exit;
 }

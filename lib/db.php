@@ -180,4 +180,59 @@ function nova_db_init(PDO $pdo): void {
     testo     TEXT    NOT NULL,
     creato_il INTEGER NOT NULL
   )');
+
+  // ── GIUNTO SEO ↔ REDAZIONE: "pezzo" in pipeline a due gate ─────────────
+  $pdo->exec("CREATE TABLE IF NOT EXISTS pezzo (
+    id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug                 TEXT    NOT NULL UNIQUE,
+    titolo               TEXT    NOT NULL,
+    origine              TEXT    NOT NULL DEFAULT 'redazione',  -- redazione|seo
+    tipo                 TEXT    NOT NULL DEFAULT 'post',       -- post|risorsa|pagina
+    fonte                TEXT    NOT NULL DEFAULT '',
+    keyword_target       TEXT    NOT NULL DEFAULT '',
+    search_intent        TEXT    NOT NULL DEFAULT '',
+    discover             INTEGER NOT NULL DEFAULT 0,
+    come_spec            TEXT    NOT NULL DEFAULT '',           -- spec COME del Reparto SEO
+    gate_seo             TEXT    NOT NULL DEFAULT 'in_attesa',  -- in_attesa|ok|no
+    gate_seo_nota        TEXT    NOT NULL DEFAULT '',
+    gate_rilevanza       TEXT    NOT NULL DEFAULT 'in_attesa',  -- in_attesa|ok|no
+    gate_rilevanza_nota  TEXT    NOT NULL DEFAULT '',
+    stato                TEXT    NOT NULL DEFAULT 'in_valutazione', -- in_valutazione|in_pipeline|scartato|promosso
+    commento             TEXT    NOT NULL DEFAULT '',
+    testo                TEXT    NOT NULL DEFAULT '',           -- testo dell'articolo (pregresso) per la validazione
+    bozza_slug           TEXT    NOT NULL DEFAULT '',           -- link alla bozza (coda approvazioni) dopo promozione
+    ordine               INTEGER NOT NULL DEFAULT 0,
+    creata_il            INTEGER NOT NULL,
+    aggiornata_il        INTEGER
+  )");
+  // Migrazioni idempotenti per i DB pezzo gia esistenti (staging/prod).
+  foreach (['testo' => 'TEXT', 'bozza_slug' => 'TEXT'] as $col => $type) {
+    $has = false;
+    foreach ($pdo->query('PRAGMA table_info(pezzo)') as $c) { if (($c['name'] ?? '') === $col) { $has = true; break; } }
+    if (!$has) { try { $pdo->exec("ALTER TABLE pezzo ADD COLUMN $col $type NOT NULL DEFAULT ''"); } catch (Throwable $e) {} }
+  }
+
+  // ── REPARTO COMMERCIALE: coda approvazione prospect outbound ───────────
+  // Il motore (qualify) produce i prospect idonei con email role-based; Fabio
+  // approva qui PRIMA di ogni invio. Approvato = pronto per l'invio (che resta
+  // gated/spento finche' non si collega lo SMTP). Stato e commento nello store.
+  $pdo->exec("CREATE TABLE IF NOT EXISTS prospect (
+    id                INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_id        TEXT    NOT NULL DEFAULT '',
+    company           TEXT    NOT NULL,
+    domain            TEXT    NOT NULL DEFAULT '',
+    email             TEXT    NOT NULL DEFAULT '',
+    email_role_based  INTEGER NOT NULL DEFAULT 0,
+    enrich            TEXT    NOT NULL DEFAULT '',           -- sorgente email (site/apollo/record)
+    lingua            TEXT    NOT NULL DEFAULT 'EN',
+    lever             TEXT    NOT NULL DEFAULT '',
+    subject           TEXT    NOT NULL DEFAULT '',
+    corpo             TEXT    NOT NULL DEFAULT '',           -- email gia' compilata per l'approvazione
+    note              TEXT    NOT NULL DEFAULT '',
+    stato             TEXT    NOT NULL DEFAULT 'da_approvare', -- da_approvare|approvato|modifiche|rifiutato
+    commento          TEXT    NOT NULL DEFAULT '',
+    creata_il         INTEGER NOT NULL,
+    aggiornata_il     INTEGER,
+    UNIQUE(company_id, domain)
+  )");
 }
