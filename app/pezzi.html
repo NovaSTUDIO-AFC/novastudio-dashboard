@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Pipeline contenuti (SEO ↔ Redazione) — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .pz-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .pz-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 15px; }
+    .pz-card.stato-in_pipeline { border-color:#2e7d51; }
+    .pz-card.stato-scartato { opacity:.55; }
+    .pz-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .pz-badge { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .pz-orig.seo { background:#13283a; color:#7fd5ff; }
+    .pz-orig.redazione { background:#2a1c3a; color:#cf9bff; }
+    .pz-tipo { font-size:11px; color:#8aa0bd; border:1px solid #243049; border-radius:999px; padding:2px 9px; }
+    .pz-disc { font-size:11px; background:#3a2c12; color:#ffce85; border-radius:999px; padding:2px 9px; }
+    .pz-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; margin-left:auto; }
+    .pz-stato.in_valutazione { background:#1e2c44; color:#9cc0ff; }
+    .pz-stato.in_pipeline { background:#143524; color:#7fe0a6; }
+    .pz-stato.scartato { background:#3a1820; color:#ff9bab; }
+    .pz-titolo { font-size:16px; font-weight:700; line-height:1.35; margin:2px 0 3px; }
+    .pz-fonte { font-size:12px; color:#8aa0bd; margin:0 0 6px; }
+    .pz-meta { font-size:13px; color:#c3d0e2; margin:0 0 8px; }
+    .pz-meta b { color:#9cc0ff; }
+    .pz-come { margin:8px 0; padding:9px 11px; border-radius:9px; border:1px solid #2c456e; background:#0f1a2c; }
+    .pz-come h4 { margin:0 0 3px; font-size:11px; color:#9cc0ff; text-transform:uppercase; letter-spacing:.05em; }
+    .pz-come .body { line-height:1.5; color:#c3d0e2; font-size:13.5px; white-space:pre-wrap; }
+    .pz-gates { display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
+    .pz-gate { flex:1; min-width:240px; background:#0e1622; border:1px solid #243049; border-radius:10px; padding:11px 12px; }
+    .pz-gate h4 { margin:0 0 6px; font-size:12px; letter-spacing:.04em; }
+    .pz-gate.seo h4 { color:#7fd5ff; }
+    .pz-gate.rilevanza h4 { color:#cf9bff; }
+    .pz-esito { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .pz-esito.in_attesa { background:#1e2c44; color:#9cc0ff; }
+    .pz-esito.ok { background:#143524; color:#7fe0a6; }
+    .pz-esito.no { background:#3a1820; color:#ff9bab; }
+    .pz-gate textarea { width:100%; box-sizing:border-box; margin-top:8px; padding:8px; min-height:42px;
+      background:#0b1018; border:1px solid #243049; border-radius:8px; color:#e7edf6; font-size:13px;
+      font-family:inherit; resize:vertical; outline:none; }
+    .pz-gate textarea:focus { border-color:#4f8cff; }
+    .pz-gate .row { display:flex; gap:8px; margin-top:8px; }
+    .pz-gate button { padding:7px 12px; border:0; border-radius:8px; font-weight:600; cursor:pointer; font-size:13px; }
+    .b-ok { background:#1f7a4d; color:#fff; }
+    .b-no { background:#7a2330; color:#fff; }
+    .pz-gate .locked { font-size:12px; color:#6f859f; margin-top:8px; }
+    .pz-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .pz-help { background:#101826; border:1px solid #243049; border-radius:12px; padding:12px 15px; margin-bottom:16px; color:#c3d0e2; font-size:13.5px; line-height:1.55; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Pipeline contenuti — SEO ↔ Redazione</h1>
+        <div class="sub">Ogni pezzo (post / risorsa / pagina) passa due gate prima della scrittura. Due "ok" → entra in pipeline.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="pz-conta">—</span></span>
+    </header>
+
+    <section class="pz-help">
+      <b>Come funziona:</b> un pezzo nasce in <b style="color:#cf9bff">Redazione</b> (il News Scout trova una notizia) o in
+      <b style="color:#7fd5ff">SEO</b> (scova una nicchia). Per entrare in scrittura serve <b>Gate SEO</b> (utile per
+      posizionamento organico + AI/LLM? con la spec del COME) <b>e</b> <b>Gate Rilevanza</b> (pertinente alla nicchia Simracing?).
+      Due "ok" → <b>in pipeline</b> (parte la trafila Redazione). Un "no" → scartato. Tutto qui, niente Asana.
+    </section>
+
+    <section>
+      <ul class="pz-list" id="lista-pezzi"></ul>
+    </section>
+
+    <footer>Il Reparto SEO governa il <b>Gate SEO</b> e detta il COME; la Redazione governa il <b>Gate Rilevanza</b>. Tu (admin) puoi entrambi.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/pezzo-dati.js"></script>
+  <script src="assets/pezzi.js"></script>
+</body>
+</html>
