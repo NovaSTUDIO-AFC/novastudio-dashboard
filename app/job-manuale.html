@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Manuale Reparto Job — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .doc { line-height:1.6; color:#dce6f3; }
+    .doc h1 { font-size:24px; margin:1.2rem 0 .4rem; }
+    .doc h2 { font-size:20px; margin:1.6rem 0 .5rem; padding-top:.6rem; border-top:1px solid #1c2740; }
+    .doc h3 { font-size:16px; margin:1.1rem 0 .4rem; color:#cfe0f5; }
+    .doc p { margin:.5rem 0; }
+    .doc ul, .doc ol { margin:.4rem 0 .8rem; padding-left:1.3rem; }
+    .doc li { margin:.25rem 0; }
+    .doc code { background:#0e1622; border:1px solid #243049; border-radius:5px; padding:1px 5px; font-size:.92em; }
+    .doc blockquote { margin:.6rem 0; padding:.5rem .9rem; border-left:3px solid #4f8cff;
+      background:#101a2a; border-radius:0 8px 8px 0; color:#c3d0e2; }
+    .doc hr { border:0; border-top:1px solid #1c2740; margin:1.4rem 0; }
+    .doc a { color:#4f8cff; word-break:break-word; }
+    .doc table { width:100%; border-collapse:collapse; margin:.6rem 0 1rem; font-size:14px; display:block; overflow-x:auto; }
+    .doc th, .doc td { border:1px solid #243049; padding:7px 10px; text-align:left; vertical-align:top; }
+    .doc th { background:#121a28; color:#cfe0f5; }
+    .doc tr:nth-child(even) td { background:#0f1825; }
+    .doc .ok { color:#7fe0a6; font-weight:600; }
+    .doc .todo { color:#ffce85; font-weight:600; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Manuale del Reparto Job</h1>
+        <div class="sub">Cosa fa, come funziona, gli strumenti, le skill e gli agenti. La fonte unica del reparto.</div>
+      </div>
+    </header>
+    <section><article class="doc">
+
+<h1>Reparto Job — manuale</h1>
+<blockquote>
+<p>Reparto che aiuta Fabio a trovare un lavoro migliore (o un part-time) <strong>da dipendente</strong>, in parallelo a NovaSTUDIO/Simracing.Fan. Il sistema fa il lavoro pesante (cerca, valuta, prepara CV/cover/one-pager, predispone l'invio); <strong>Fabio decide e approva</strong>. Stato: <span class="ok">V1 viva e funzionante</span> — il ciclo completo è stato dimostrato con dati reali.</p>
+</blockquote>
+
+<h2>1. Cosa fa</h2>
+<p>Scova offerte verificate, valuta aziende (legittimità/scam), assegna un match onesto e una stima di retribuzione, prepara i materiali di candidatura su misura (CV, cover, one-pager brandizzato) e predispone l'invio. Traccia le candidature inviate e il follow-up. Il successo si misura su una cosa: <strong>buone candidature inviate</strong>, con Fabio che approva, non che esegue.</p>
+
+<h2>2. Regole del reparto</h2>
+<ul>
+<li><strong>Solo lavoro da dipendente</strong> (full-time o part-time permanente). Niente freelance/contract.</li>
+<li><strong>Eleggibile dall'Italia</strong> (assume in Italia, o remote-worldwide, o EMEA con Italia inclusa).</li>
+<li><strong>Smart working 100%</strong> preferito — con deroga per il <strong>motorsport</strong> (per la passione, on-site ammesso).</li>
+<li><strong>Gate umani</strong>: nessuna candidatura parte senza l'OK di Fabio. Niente auto-apply sui form ATS (viola i ToS) → invio assistito; niente scraping LinkedIn.</li>
+<li><strong>Onestà</strong>: match a stelle reali, mai gonfiati; solo offerte/email con URL verificato (niente invenzioni).</li>
+</ul>
+
+<h2>3. Come funziona — il ciclo</h2>
+<p><strong>Job Scout → Filter/Dedup → Company Researcher → 🛡️ Legitimacy Gate → Match Scorer → Salary Evaluator → [le offerte compaiono in dashboard] → 🔒 Fabio decide (Approva / Tieni / Scarta) → Candidate Personalizer (CV + cover + one-pager) → 🔒 Fabio approva l'invio → Candidatura inviata → Follow-up.</strong></p>
+<p>Il pezzo che chiude il ciclo è il <strong>Ponte</strong>: le decisioni e i commenti di Fabio vivono nel database <em>sul server</em>; il Ponte (sul Mac mini, ogni 4h, <strong>solo codice, zero token</strong>) li scarica e li porta a Max, che procede. Così la dashboard non è solo un display: è un comando.</p>
+
+<h2>4. Gli agenti / funzioni</h2>
+<table>
+<thead><tr><th>Agente</th><th>Cosa fa</th><th>Stato</th></tr></thead>
+<tbody>
+<tr><td><strong>Job Scout</strong></td><td>Monitora fonti (career page, board, Google Jobs; focus Motorsport e AI-in-marketing) e porta nuove offerte verificate in dashboard.</td><td class="ok">attivo · schedulato sabato 06:00</td></tr>
+<tr><td><strong>Filter / Dedup</strong></td><td>Toglie i doppioni e applica i filtri duri (solo dipendente, eleggibile Italia, remoto/deroga motorsport).</td><td class="ok">attivo</td></tr>
+<tr><td><strong>Company Researcher</strong></td><td>Dossier azienda: settore, dimensione, stabilità, remote policy, reputazione.</td><td class="ok">attivo</td></tr>
+<tr><td>🛡️ <strong>Legitimacy / Scam Gate</strong></td><td>Verifica azienda reale, dominio ufficiale, annuncio coerente; blocca le offerte fasulle (lezione PUMA).</td><td class="ok">attivo</td></tr>
+<tr><td><strong>Match Scorer</strong></td><td>Stelle + <strong>% attinenza profilo</strong>, requisito per requisito, con nota onesta.</td><td class="ok">attivo</td></tr>
+<tr><td><strong>Salary Evaluator</strong></td><td>Stima la RAL e la confronta col target; genera la <strong>% match preferenze</strong>.</td><td class="ok">attivo</td></tr>
+<tr><td><strong>CV Manager</strong></td><td>CV master EN (con blocco AI) → varianti mirate per ruolo + CV-PDF.</td><td class="ok">attivo</td></tr>
+<tr><td><strong>Candidate Personalizer</strong></td><td>Su offerta approvata: CV su misura + cover + <strong>one-pager brandizzato</strong> sui colori azienda (PDF), agganciati alla scheda.</td><td class="ok">attivo</td></tr>
+<tr><td><strong>Application Manager</strong></td><td>Predispone l'invio: bozza email (offerte email-based) o pacchetto pronto (offerte via form). Invio = gate di Fabio.</td><td class="ok">bozze email · form assistiti</td></tr>
+<tr><td><strong>Follow-up Manager</strong></td><td>Le candidature inviate vanno nella pagina Follow-up, con note. (Promemoria automatici: da accendere.)</td><td class="ok">pagina viva</td></tr>
+<tr><td><strong>Ponte</strong></td><td>Sync deterministico: scarica le decisioni dal server in un'inbox che Max legge; ricarica/deploya in dashboard.</td><td class="ok">attivo (Mac mini, 4h)</td></tr>
+<tr><td><strong>Interview Manager</strong></td><td>A colloquio fissato: dossier + Q&A + simulazione.</td><td class="todo">da fare (Fase 4)</td></tr>
+<tr><td><strong>Continuous Improvement</strong></td><td>Si nutre del tuo <strong>feedback</strong> in dashboard per ritarare ricerche e pesi.</td><td class="ok">via feedback + ponte</td></tr>
+</tbody>
+</table>
+
+<h2>5. Strumenti &amp; tecnologie</h2>
+<table>
+<thead><tr><th>Strumento</th><th>A cosa serve</th></tr></thead>
+<tbody>
+<tr><td><strong>Dashboard PHP + SQLite</strong></td><td>L'interfaccia del reparto e lo store dello stato (offerte, decisioni, commenti, materiali). Su Hostinger.</td></tr>
+<tr><td><strong>Ponte</strong> (<code>ponte.sh</code> + launchd)</td><td>Sul Mac mini sempre acceso: ogni 4h porta le tue decisioni dal server a Max. Solo codice, zero token.</td></tr>
+<tr><td><strong>Job Scout schedulato</strong> (routine cloud)</td><td>Sabato 06:00: cerca nuove offerte e manda il round-up su Slack.</td></tr>
+<tr><td><strong>Gmail (connettore MCP)</strong></td><td>Crea le bozze di candidatura (le spedisci tu, da info@afciaccio.it via alias).</td></tr>
+<tr><td><strong>Chrome headless</strong></td><td>Genera i one-pager brandizzati e i CV in PDF.</td></tr>
+<tr><td><strong>Ricerca multi-agente</strong> (WebSearch/WebFetch)</td><td>Job Scout e Fase 2 girano come agenti paralleli che aprono e verificano gli annunci.</td></tr>
+<tr><td><strong>API/MCP consigliati</strong></td><td>Adzuna (motore offerte, gratis, Italia), Apollo (valuta aziende + trova contatto), Apify (fonti pubbliche). LinkedIn solo assistito.</td></tr>
+</tbody>
+</table>
+
+<h2>6. Skill (PAI) usate dal reparto</h2>
+<ul>
+<li><strong>deep-research</strong> — panorami citati (es. divisioni "Corse Clienti" dei costruttori).</li>
+<li><strong>schedule</strong> — pianifica il Job Scout (routine cloud).</li>
+<li><strong>Interceptor</strong> — verifica visiva di pagine/PDF (quando l'estensione è connessa).</li>
+<li><strong>ponytail-review</strong> — tiene il codice del reparto asciutto (no over-engineering).</li>
+</ul>
+
+<h2>7. La dashboard del reparto</h2>
+<ul>
+<li><strong>Opportunità</strong> — tutte le offerte: <strong>⭐ best 3 in evidenza</strong>, tag (full/part-time, stipendio), <strong>% attinenza profilo</strong> e <strong>% match preferenze</strong>, valutazione e mossa suggerita. Sulle approvate: badge <strong>📄 Materiali pronti</strong> con CV/cover + allegati PDF. Bottoni: Approva mossa · Tieni · Scarta · Candidatura inviata.</li>
+<li><strong>Candidature &amp; Follow-up</strong> — dove finiscono le candidature inviate, con note e promemoria.</li>
+<li><strong>🧭 Indirizza le ricerche</strong> — il box in cui scrivi cosa privilegiare/evitare: guida il Job Scout.</li>
+<li><strong>Manuale</strong> — questa pagina.</li>
+</ul>
+
+<h2>8. Cosa resta a Fabio (e basta)</h2>
+<ol>
+<li>Approvare / scartare le offerte e dare feedback.</li>
+<li>Approvare CV + cover + invio.</li>
+<li>Spedire (le bozze email sono pronte; i form si compilano col contenuto pronto — l'unica cosa non automatizzabile per i ToS).</li>
+</ol>
+
+<h2>9. Stato attuale</h2>
+<ul>
+<li><span class="ok">Fatto:</span> profilo master; ricerche (generale + AI-in-marketing + Motorsport); Fase 2 (dossier); dashboard con best-3/tag/percentuali/materiali; pagina Follow-up; CV+cover+one-pager brandizzati per le candidature approvate; bozze email pronte; Ponte attivo sul Mac mini; Job Scout schedulato.</li>
+<li><span class="todo">Aperto / prossimo:</span> generazione automatica dei materiali al momento dell'"Approva" (oggi Max la innesca quando il Ponte vede l'approvazione); scrittura-ritorno del Ponte in dashboard (per togliere offerte/attaccare materiali da solo); promemoria follow-up automatici; Interview Manager; one-pager per le offerte via-form quando servono.</li>
+</ul>
+
+    </article></section>
+    <footer>Reparto Job · documento vivo · aggiornato da Max a ogni evoluzione del reparto.</footer>
+  </div>
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

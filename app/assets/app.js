@@ -107,7 +107,35 @@ function renderServices() {
         ${s.extra ? `<div class="ex">${s.extra}</div>` : ""}
       </div>
     </div>`).join("");
-  document.getElementById("services").innerHTML = html;
+  document.getElementById("services").innerHTML = html + cardGuardia();
+}
+
+// Card live della Guardia Mac mini — dati da window.MACMINI_STATUS (pubblicato
+// dalla guardia ogni 10 min). Se manca o è vecchio, lo dice chiaramente.
+function cardGuardia() {
+  const s = window.MACMINI_STATUS;
+  if (!s) return `
+    <div class="card svc">
+      <div class="ic">🛡️</div>
+      <div><div class="nm">Guardia Mac mini</div>
+        <div class="d">In attesa del primo aggiornamento…</div></div>
+    </div>`;
+  const eta = (Date.now() - new Date(s.ts).getTime()) / 60000; // minuti dall'ultimo dato
+  const vecchio = eta > 25; // la guardia gira ogni 10 min: oltre 25 = probabilmente ferma
+  const stato = vecchio ? "⚪️ dati vecchi" : (s.sistema === "bad" ? "🔴 sotto sforzo" : "🟢 tutto ok");
+  const ora = new Date(s.ts).toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+  const dett = `🌡️ ${Math.round(s.tempC)}°C · carico ${s.load1.toFixed(1)} · disco ${s.diskPct}%` +
+               (s.throttle ? " · 🔥 throttling" : "");
+  const probl = s.sistema === "bad" && s.problemi?.length ? ` — ${s.problemi.join(", ")}` : "";
+  return `
+    <div class="card svc">
+      <div class="ic">🛡️</div>
+      <div>
+        <div class="nm">Guardia Mac mini · ${stato}</div>
+        <div class="d">${dett}${probl}</div>
+        <div class="ex">aggiornato alle ${ora}${vecchio ? " · controlla se la guardia è attiva" : ""}</div>
+      </div>
+    </div>`;
 }
 
 renderMap();

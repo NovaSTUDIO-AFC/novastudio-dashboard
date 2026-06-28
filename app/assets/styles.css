@@ -87,6 +87,46 @@ body {
   color: var(--text); font-size: 1.1rem; border-radius: 9px; padding: 6px 12px; cursor: pointer;
 }
 
+/* ── Navigazione ad albero (drawer su tutte le larghezze) ── */
+.nav-toggle { display: block; }                 /* hamburger sempre visibile */
+.nav-links {
+  display: none; position: absolute; top: 100%; right: 12px;
+  width: min(330px, calc(100vw - 24px));
+  flex-direction: column; gap: 2px; margin: 0;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 10px; box-shadow: var(--shadow);
+  max-height: 82vh; overflow-y: auto;
+}
+.nav-links.open { display: flex; }
+.nav-proj-switch { display: flex; gap: 6px; margin: 6px 0 2px; }
+.proj-chip {
+  flex: 1; padding: 8px 10px; border: 1px solid var(--border); background: var(--card-2);
+  color: var(--text-dim); border-radius: 9px; cursor: pointer; font-size: .82rem; font-weight: 600;
+}
+.proj-chip.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+.nav-section {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-dim); margin: 10px 6px 3px;
+}
+.nav-group {
+  display: flex; align-items: center; gap: 6px; width: 100%;
+  background: none; border: 0; color: var(--text); font-size: .9rem;
+  padding: 8px 12px; border-radius: 9px; cursor: pointer; text-align: left;
+}
+.nav-group:hover { background: var(--card-2); }
+.nav-group .caret { margin-left: auto; opacity: .6; font-size: .8rem; }
+.nav-sub {
+  display: none; flex-direction: column; gap: 2px;
+  margin: 2px 0 2px 12px; border-left: 1px solid var(--border); padding-left: 6px;
+}
+.nav-sub.open { display: flex; }
+.nav-bread {
+  max-width: 1100px; margin: 0 auto; padding: 12px 20px 0;
+  color: var(--text-dim); font-size: .8rem;
+}
+.nav-bread .sep { opacity: .5; margin: 0 6px; }
+.nav-bread strong { color: var(--text); font-weight: 600; }
+
 /* ── Layout ── */
 .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
 

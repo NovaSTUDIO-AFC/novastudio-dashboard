@@ -6,10 +6,22 @@
 //    (Chrome/Edge, Safari Mac, Safari iOS, Android, Firefox).
 // ───────────────────────────────────────────────────────────────
 (function () {
-  // 1) Registra il service worker (scope = cartella della dashboard).
+  // 1) Registra il service worker + AUTO-AGGIORNAMENTO.
+  //    Mobile/app: niente hard refresh. Si controlla subito (e ogni ora) se c'è
+  //    una versione nuova; quando il nuovo SW prende il controllo, la pagina si
+  //    ricarica UNA volta da sola → vedi sempre l'ultima versione.
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js").catch(function () { /* non bloccante */ });
+      navigator.serviceWorker.register("sw.js").then(function (reg) {
+        reg.update();
+        setInterval(function () { reg.update(); }, 60 * 60 * 1000);
+      }).catch(function () { /* non bloccante */ });
+    });
+    var ricaricato = false;
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      if (ricaricato) return;
+      ricaricato = true;
+      window.location.reload();
     });
   }
 

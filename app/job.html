@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Job — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .jb-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .jb-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 15px; }
+    .jb-card.stato-approvata { border-color:#2e7d51; }
+    .jb-card.stato-tieni { border-color:#b07a1e; }
+    .jb-card.stato-scartata { opacity:.55; }
+    .jb-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .jb-match { font-size:13px; font-weight:700; color:#ffce85; letter-spacing:1px; }
+    .jb-formato { font-size:11px; color:#8aa0bd; border:1px solid #243049; border-radius:999px; padding:2px 9px; }
+    .jb-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .jb-stato.da_decidere { background:#1e2c44; color:#9cc0ff; }
+    .jb-stato.approvata { background:#143524; color:#7fe0a6; }
+    .jb-stato.tieni { background:#3a2c12; color:#ffce85; }
+    .jb-stato.scartata { background:#3a1820; color:#ff9bab; }
+    .jb-nome { font-size:17px; font-weight:700; line-height:1.35; margin:2px 0 1px; }
+    .jb-azienda { font-size:13px; color:#9fb1c9; margin-bottom:8px; }
+    .jb-ral { font-size:13px; color:#7fe0a6; margin:2px 0 8px; }
+    .jb-desc { line-height:1.55; color:#dce6f3; margin-bottom:8px; }
+    .jb-box { margin:8px 0; padding:9px 11px; border-radius:9px; border:1px solid #243049; background:#0e1622; }
+    .jb-box h4 { margin:0 0 3px; font-size:11px; color:#8aa0bd; text-transform:uppercase; letter-spacing:.05em; }
+    .jb-box .body { line-height:1.5; color:#c3d0e2; font-size:14px; }
+    .jb-box.sugg { border-color:#2c456e; background:#0f1a2c; }
+    .jb-box.sugg h4 { color:#9cc0ff; }
+    .jb-link { display:inline-block; margin:2px 0 6px; color:#4f8cff; font-size:14px; font-weight:600; word-break:break-all; }
+    .jb-comm { width:100%; box-sizing:border-box; margin-top:10px; padding:10px; min-height:50px;
+      background:#0e1622; border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px;
+      font-family:inherit; resize:vertical; outline:none; }
+    .jb-comm:focus { border-color:#4f8cff; }
+    .jb-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .jb-actions button { padding:9px 14px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; }
+    .b-appr { background:#1f7a4d; color:#fff; }
+    .b-tieni { background:#9a6612; color:#fff; }
+    .b-scarta { background:#7a2330; color:#fff; }
+    .b-cand { background:#2c456e; color:#fff; }
+    .jb-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    /* tag rapidi */
+    .jb-tags { display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 9px; }
+    .jb-tag { font-size:11px; color:#9fb1c9; background:#0e1622; border:1px solid #243049; border-radius:999px; padding:3px 10px; }
+    .jb-tag.pt { color:#ffce85; border-color:#5a4a1e; }
+    /* percentuali */
+    .jb-metrics { display:flex; gap:18px; margin:2px 0 12px; flex-wrap:wrap; }
+    .jb-metric { flex:1; min-width:150px; }
+    .jb-metric .m-top { display:flex; justify-content:space-between; font-size:12px; color:#9fb1c9; margin-bottom:5px; }
+    .jb-metric .m-top b { color:#dce6f3; }
+    .m-bar { height:6px; background:#1f262b; border-radius:99px; overflow:hidden; }
+    .m-bar i { display:block; height:100%; background:linear-gradient(90deg,#4f8cff,#7bd5ff); border-radius:99px; }
+    .m-bar.pref i { background:linear-gradient(90deg,#e0698f,#ffb38a); }
+    /* badge materiali pronti */
+    .jb-badge { display:inline-block; margin:2px 0 8px; font-size:12px; font-weight:700; color:#06281a;
+      background:#5fbd74; border-radius:999px; padding:4px 12px; }
+    .jb-mat-toggle { background:transparent; border:0; color:#5fbd74; cursor:pointer; font-size:14px; font-weight:600; padding:6px 0; }
+    .jb-mat { display:none; margin:6px 0 4px; }
+    .jb-mat.open { display:block; }
+    .jb-mat pre { white-space:pre-wrap; word-break:break-word; font-family:inherit; font-size:13.5px; line-height:1.5;
+      color:#dce6f3; background:#0e1622; border:1px solid #2e7d51; border-radius:10px; padding:14px; margin:0; }
+    .jb-allegati { margin:8px 0 2px; font-size:13.5px; color:#9fb1c9; }
+    .jb-allegati a { color:#5fbd74; font-weight:600; }
+    /* evidenza top-3 */
+    .jb-card.is-top { border-color:#9a7b22; box-shadow:0 0 0 1px rgba(255,206,133,.16); }
+    .jb-evidenza { margin-bottom:10px; }
+    .jb-evidenza h2 { font-size:15px; color:#ffce85; margin:0 0 12px; }
+    .jb-altre h2 { font-size:14px; color:#8aa0bd; margin:0 0 12px; text-transform:uppercase; letter-spacing:.04em; }
+    .jb-aggiornata { font-size:11px; color:#6f859f; margin-top:8px; }
+    /* Box feedback ricerche */
+    .jb-fb { background:#101826; border:1px solid #243049; border-radius:12px; padding:14px 15px; margin-bottom:18px; }
+    .jb-fb h3 { margin:0 0 4px; font-size:15px; }
+    .jb-fb p { margin:0 0 10px; font-size:13px; color:#8aa0bd; }
+    .jb-fb textarea { width:100%; box-sizing:border-box; padding:10px; min-height:56px; background:#0e1622;
+      border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px; font-family:inherit; resize:vertical; outline:none; }
+    .jb-fb textarea:focus { border-color:#4f8cff; }
+    .jb-fb .row { display:flex; justify-content:flex-end; margin-top:8px; }
+    .jb-fb button { padding:9px 16px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; background:#2c456e; color:#fff; }
+    .jb-fb-list { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
+    .jb-fb-list li { font-size:13px; color:#c3d0e2; background:#0e1622; border:1px solid #243049; border-radius:8px; padding:7px 10px; }
+    .jb-fb-list .when { color:#6f859f; font-size:11px; display:block; margin-top:2px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Job — Opportunità</h1>
+        <div class="sub">Offerte selezionate e valutate dal reparto. Approva la prossima mossa, tienila d'occhio o scartala. Il tuo commento torna al reparto.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="jb-conta">—</span></span>
+    </header>
+
+    <section class="jb-fb">
+      <h3>🧭 Indirizza le prossime ricerche</h3>
+      <p>Scrivimi cosa privilegiare o evitare (settori, formato, paesi, retribuzione…). Lo uso per affinare le ricerche successive.</p>
+      <textarea id="jb-fb-testo" placeholder="Es: dai priorità ai ruoli AI-in-marketing remote-Italia; evita i full-time onsite; ok part-time anche sotto i €40k…"></textarea>
+      <div class="row"><button id="jb-fb-invia" type="button">Invia feedback</button></div>
+      <ul class="jb-fb-list" id="jb-fb-list"></ul>
+    </section>
+
+    <section class="jb-evidenza">
+      <h2>⭐ In evidenza — le mie 3 migliori</h2>
+      <ul class="jb-list" id="lista-top"></ul>
+    </section>
+
+    <section class="jb-altre">
+      <h2>Tutte le altre</h2>
+      <ul class="jb-list" id="lista-job"></ul>
+    </section>
+
+    <footer>Le candidature inviate si spostano nella pagina <b>Follow-up</b>. Le opportunità e i tuoi commenti vivono nello store · il reparto li legge per procedere.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/job-dati.js"></script>
+  <script src="assets/job.js"></script>
+</body>
+</html>

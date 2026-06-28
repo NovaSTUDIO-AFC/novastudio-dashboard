@@ -67,4 +67,117 @@ function nova_db_init(PDO $pdo): void {
     creata_il INTEGER NOT NULL,
     fatta_il  INTEGER
   )');
+
+  // Reparto Redazione: coda di approvazione delle bozze. Lo stato (approvato/
+  // modifiche/rifiutato) e il commento di Fabio vivono qui nello store; il
+  // reparto li legge per la rilavorazione e il loop di miglioramento.
+  $pdo->exec("CREATE TABLE IF NOT EXISTS bozze (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug          TEXT    NOT NULL UNIQUE,
+    titolo_en     TEXT    NOT NULL,
+    corpo_en      TEXT    NOT NULL,
+    corpo_it      TEXT    NOT NULL,
+    brief_img     TEXT,
+    fonte         TEXT,
+    categoria     TEXT,
+    asana_gid     TEXT,
+    stato         TEXT    NOT NULL DEFAULT 'da_approvare',
+    commento      TEXT,
+    creata_il     INTEGER NOT NULL,
+    aggiornata_il INTEGER
+  )");
+
+  // Migrazione idempotente: colonna immagine (URL/path della featured image).
+  $cols = $pdo->query("PRAGMA table_info(bozze)")->fetchAll();
+  $hasImg = false;
+  foreach ($cols as $c) { if (($c['name'] ?? '') === 'immagine') { $hasImg = true; break; } }
+  if (!$hasImg) {
+    try { $pdo->exec('ALTER TABLE bozze ADD COLUMN immagine TEXT'); } catch (Throwable $e) {}
+  }
+
+  // Storico passaggi della pipeline per ogni bozza (scheda articolo).
+  $pdo->exec('CREATE TABLE IF NOT EXISTS bozza_passaggi (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    bozza_id  INTEGER NOT NULL,
+    ord       INTEGER NOT NULL,
+    passo     TEXT    NOT NULL,
+    esito     TEXT,
+    nota      TEXT,
+    creata_il INTEGER NOT NULL
+  )');
+  $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passaggi_bozza ON bozza_passaggi(bozza_id)');
+
+  // Reparto Job: opportunità di lavoro selezionate e valutate. Lo stato
+  // (approvata/tieni/scartata) e il commento di Fabio vivono qui nello
+  // store; il reparto li legge per procedere con la mossa approvata.
+  $pdo->exec("CREATE TABLE IF NOT EXISTS job_opportunita (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug          TEXT    NOT NULL UNIQUE,
+    nome          TEXT    NOT NULL,
+    azienda       TEXT,
+    ruolo         TEXT,
+    link          TEXT,
+    formato       TEXT,
+    match_stelle  TEXT,
+    ral           TEXT,
+    descrizione   TEXT,
+    valutazione   TEXT,
+    suggerimento  TEXT,
+    stato         TEXT    NOT NULL DEFAULT 'da_decidere',
+    commento      TEXT,
+    ordine        INTEGER NOT NULL DEFAULT 0,
+    top           INTEGER NOT NULL DEFAULT 0,   -- 1 = tra le best 3 in evidenza
+    fit_profilo   INTEGER NOT NULL DEFAULT 0,   -- % attinenza col profilo (competenze)
+    fit_preferenze INTEGER NOT NULL DEFAULT 0,  -- % match con le preferenze (remoto/part-time/salario/eleggibilità)
+    parttime      INTEGER NOT NULL DEFAULT 0,   -- 1 = part-time
+    materiali     TEXT,                         -- materiali personalizzati pronti (CV+cover) da revisionare
+    allegati      TEXT,                         -- JSON array [{label,file}] di allegati scaricabili (PDF)
+    creata_il     INTEGER NOT NULL,
+    aggiornata_il INTEGER
+  )");
+
+  // Migrazione idempotente: aggiunge le colonne nuove ai DB già esistenti.
+  $jobCols = array_column($pdo->query("PRAGMA table_info(job_opportunita)")->fetchAll(), 'name');
+  foreach (['top' => 'INTEGER NOT NULL DEFAULT 0',
+            'fit_profilo' => 'INTEGER NOT NULL DEFAULT 0',
+            'fit_preferenze' => 'INTEGER NOT NULL DEFAULT 0',
+            'parttime' => 'INTEGER NOT NULL DEFAULT 0',
+            'materiali' => 'TEXT',
+            'allegati' => 'TEXT'] as $col => $type) {
+    if (!in_array($col, $jobCols, true)) {
+      try { $pdo->exec("ALTER TABLE job_opportunita ADD COLUMN $col $type"); } catch (Throwable $e) {}
+    }
+  }
+
+  // Feedback di Fabio che indirizza le RICERCHE successive (append-only):
+  // il reparto li legge per affinare i criteri delle prossime ricerche.
+  $pdo->exec('CREATE TABLE IF NOT EXISTS job_ricerca_feedback (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    testo     TEXT    NOT NULL,
+    creato_il INTEGER NOT NULL
+  )');
+
+  // ── REPARTO SEO: raccomandazioni di ottimizzazione (coda approvazione) ──
+  $pdo->exec("CREATE TABLE IF NOT EXISTS seo_raccomandazioni (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug             TEXT    NOT NULL UNIQUE,
+    titolo           TEXT    NOT NULL,
+    url              TEXT    NOT NULL DEFAULT '',
+    tipo             TEXT    NOT NULL DEFAULT '',
+    priorita         TEXT    NOT NULL DEFAULT 'medio',
+    descrizione      TEXT    NOT NULL DEFAULT '',
+    azione_suggerita TEXT    NOT NULL DEFAULT '',
+    stato            TEXT    NOT NULL DEFAULT 'da_decidere',
+    commento         TEXT    NOT NULL DEFAULT '',
+    ordine           INTEGER NOT NULL DEFAULT 0,
+    creata_il        INTEGER NOT NULL,
+    aggiornata_il    INTEGER
+  )");
+
+  // Feedback di Fabio che indirizza i PROSSIMI giri del reparto (append-only).
+  $pdo->exec('CREATE TABLE IF NOT EXISTS seo_feedback (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    testo     TEXT    NOT NULL,
+    creato_il INTEGER NOT NULL
+  )');
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Redazione — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .rz-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .rz-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 15px; }
+    .rz-card.stato-approvato { border-color:#2e7d51; }
+    .rz-card.stato-modifiche { border-color:#b07a1e; }
+    .rz-card.stato-rifiutato { opacity:.6; }
+    .rz-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .rz-cat { font-size:11px; color:#8aa0bd; border:1px solid #243049; border-radius:999px; padding:2px 9px; }
+    .rz-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .rz-stato.da_approvare { background:#1e2c44; color:#9cc0ff; }
+    .rz-stato.approvato { background:#143524; color:#7fe0a6; }
+    .rz-stato.modifiche { background:#3a2c12; color:#ffce85; }
+    .rz-stato.rifiutato { background:#3a1820; color:#ff9bab; }
+    .rz-titolo { font-size:17px; font-weight:700; line-height:1.35; margin:2px 0 8px; }
+    .rz-img { margin:4px 0 10px; border-radius:10px; overflow:hidden; }
+    .rz-img img { display:block; width:100%; height:auto; }
+    .rz-img-vuota { background:#0e1622; border:1px dashed #2c3a55; color:#8aa0bd;
+      font-size:13px; padding:18px 12px; text-align:center; }
+    .rz-lang { font-size:12px; font-weight:700; color:#9cc0ff; margin:2px 0 4px; }
+    .rz-it { line-height:1.55; color:#dce6f3; white-space:pre-wrap; }
+    .rz-toggle { background:transparent; border:0; color:#4f8cff; cursor:pointer; font-size:13px; padding:6px 0; }
+    .rz-extra { display:none; margin-top:8px; padding-top:10px; border-top:1px dashed #243049; }
+    .rz-extra.open { display:block; }
+    .rz-extra h4 { margin:10px 0 4px; font-size:12px; color:#8aa0bd; text-transform:uppercase; letter-spacing:.04em; }
+    .rz-extra .body { white-space:pre-wrap; line-height:1.5; color:#c3d0e2; font-size:14px; }
+    .rz-extra a { color:#4f8cff; word-break:break-all; }
+    .rz-storico { display:none; margin-top:8px; }
+    .rz-storico.open { display:block; }
+    ol.rz-steps { list-style:none; counter-reset:s; margin:6px 0 0; padding:0; }
+    ol.rz-steps li { counter-increment:s; position:relative; padding:8px 10px 8px 34px; margin-bottom:6px;
+      background:#0e1622; border:1px solid #243049; border-radius:8px; }
+    ol.rz-steps li::before { content:counter(s); position:absolute; left:8px; top:8px; width:20px; height:20px;
+      background:#1e2c44; color:#9cc0ff; border-radius:50%; font-size:12px; font-weight:700;
+      display:flex; align-items:center; justify-content:center; }
+    .st-passo { display:block; font-weight:600; color:#dce6f3; font-size:14px; }
+    .st-esito { display:inline-block; font-size:11px; color:#7fe0a6; margin-top:2px; }
+    .st-nota { display:block; font-size:13px; color:#9fb1c9; margin-top:3px; line-height:1.45; }
+    .rz-comm { width:100%; box-sizing:border-box; margin-top:10px; padding:10px; min-height:54px;
+      background:#0e1622; border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px;
+      font-family:inherit; resize:vertical; outline:none; }
+    .rz-comm:focus { border-color:#4f8cff; }
+    .rz-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .rz-actions button { padding:9px 14px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; }
+    .b-appr { background:#1f7a4d; color:#fff; }
+    .b-mod  { background:#9a6612; color:#fff; }
+    .b-rif  { background:#7a2330; color:#fff; }
+    .rz-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .rz-aggiornata { font-size:11px; color:#6f859f; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Redazione</h1>
+        <div class="sub">Approva gli articoli leggendo l'italiano. Approvato = pronto per la pubblicazione EN. Il tuo commento torna al reparto.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="rz-conta">—</span></span>
+    </header>
+
+    <section>
+      <ul class="rz-list" id="lista-bozze"></ul>
+    </section>
+
+    <footer>Le bozze e i tuoi commenti vivono nello store · il reparto li legge per la rilavorazione · pubblicazione EN: attiva quando colleghi WordPress.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/redazione-dati.js"></script>
+  <script src="assets/redazione.js"></script>
+</body>
+</html>

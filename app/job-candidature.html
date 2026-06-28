@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Job — Candidature & Follow-up — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .jb-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .jb-card { background:#121a28; border:1px solid #2e7d51; border-radius:12px; padding:14px 15px; }
+    .jb-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .jb-match { font-size:13px; font-weight:700; color:#ffce85; letter-spacing:1px; }
+    .jb-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; background:#143524; color:#7fe0a6; }
+    .jb-nome { font-size:17px; font-weight:700; line-height:1.35; margin:2px 0 1px; }
+    .jb-azienda { font-size:13px; color:#9fb1c9; margin-bottom:8px; }
+    .jb-link { display:inline-block; margin:2px 0 8px; color:#4f8cff; font-size:14px; font-weight:600; word-break:break-all; }
+    .jb-comm { width:100%; box-sizing:border-box; margin-top:8px; padding:10px; min-height:64px;
+      background:#0e1622; border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px; font-family:inherit; resize:vertical; outline:none; }
+    .jb-comm:focus { border-color:#4f8cff; }
+    .jb-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .jb-actions button { padding:9px 14px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; }
+    .b-save { background:#1f7a4d; color:#fff; }
+    .b-back { background:#3a4150; color:#fff; }
+    .jb-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .jb-aggiornata { font-size:11px; color:#6f859f; margin-top:8px; }
+    .jb-hint { font-size:11px; color:#8aa0bd; margin-top:4px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Candidature &amp; Follow-up</h1>
+        <div class="sub">Le offerte per cui hai inviato la candidatura. Tieni qui le note di follow-up; quando serve, te le ricordo.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="jb-conta">—</span></span>
+    </header>
+
+    <section>
+      <ul class="jb-list" id="lista-cand"></ul>
+    </section>
+
+    <footer>Per ogni candidatura: annota data invio, contatto, esito e prossimo follow-up. "Riporta in lista" la rimanda tra le opportunità da decidere.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/job-dati.js"></script>
+  <script src="assets/job-candidature.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>SEO — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .seo-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .seo-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 15px; }
+    .seo-card.stato-approvata { border-color:#2e7d51; }
+    .seo-card.stato-implementata { border-color:#2c6e8a; }
+    .seo-card.stato-rifiutata { opacity:.55; }
+    .seo-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+    .seo-prio { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .seo-prio.alto  { background:#7a2330; color:#ff9bab; }
+    .seo-prio.medio { background:#3a2c12; color:#ffce85; }
+    .seo-prio.basso { background:#0e1622; color:#8aa0bd; border:1px solid #243049; }
+    .seo-tipo { font-size:11px; color:#8aa0bd; border:1px solid #243049; border-radius:999px; padding:2px 9px; }
+    .seo-stato { font-size:11px; font-weight:700; border-radius:999px; padding:2px 9px; }
+    .seo-stato.da_decidere  { background:#1e2c44; color:#9cc0ff; }
+    .seo-stato.approvata    { background:#143524; color:#7fe0a6; }
+    .seo-stato.implementata { background:#11283a; color:#7fd5ff; }
+    .seo-stato.rifiutata    { background:#3a1820; color:#ff9bab; }
+    .seo-titolo { font-size:16px; font-weight:700; line-height:1.35; margin:2px 0 3px; }
+    .seo-url { display:inline-block; margin:0 0 8px; color:#4f8cff; font-size:13px; font-weight:600; word-break:break-all; }
+    .seo-desc { line-height:1.55; color:#dce6f3; font-size:14px; margin-bottom:8px; }
+    .seo-box { margin:8px 0 2px; padding:9px 11px; border-radius:9px; border:1px solid #2c456e; background:#0f1a2c; }
+    .seo-box h4 { margin:0 0 3px; font-size:11px; color:#9cc0ff; text-transform:uppercase; letter-spacing:.05em; }
+    .seo-box .body { line-height:1.5; color:#c3d0e2; font-size:14px; }
+    .seo-comm { width:100%; box-sizing:border-box; margin-top:10px; padding:10px; min-height:50px;
+      background:#0e1622; border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px;
+      font-family:inherit; resize:vertical; outline:none; }
+    .seo-comm:focus { border-color:#4f8cff; }
+    .seo-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .seo-actions button { padding:9px 14px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; }
+    .b-appr { background:#1f7a4d; color:#fff; }
+    .b-impl { background:#2c6e8a; color:#fff; }
+    .b-rif  { background:#7a2330; color:#fff; }
+    .seo-aggiornata { font-size:11px; color:#6f859f; margin-top:8px; }
+    .seo-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .seo-fb { background:#101826; border:1px solid #243049; border-radius:12px; padding:14px 15px; margin-bottom:18px; }
+    .seo-fb h3 { margin:0 0 4px; font-size:15px; }
+    .seo-fb p { margin:0 0 10px; font-size:13px; color:#8aa0bd; }
+    .seo-fb textarea { width:100%; box-sizing:border-box; padding:10px; min-height:56px; background:#0e1622;
+      border:1px solid #243049; border-radius:10px; color:#e7edf6; font-size:14px; font-family:inherit; resize:vertical; outline:none; }
+    .seo-fb textarea:focus { border-color:#4f8cff; }
+    .seo-fb .row { display:flex; justify-content:flex-end; margin-top:8px; }
+    .seo-fb button { padding:9px 16px; border:0; border-radius:9px; font-weight:600; cursor:pointer; font-size:14px; background:#2c456e; color:#fff; }
+    .seo-fb-list { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
+    .seo-fb-list li { font-size:13px; color:#c3d0e2; background:#0e1622; border:1px solid #243049; border-radius:8px; padding:7px 10px; }
+    .seo-fb-list .when { color:#6f859f; font-size:11px; display:block; margin-top:2px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>SEO — Raccomandazioni</h1>
+        <div class="sub">Azioni di ottimizzazione trovate dal reparto sul sito live. Approva, segna come fatto o rifiuta — il tuo commento torna al reparto.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="seo-conta">—</span></span>
+    </header>
+
+    <section class="seo-fb">
+      <h3>🧭 Indirizza il reparto SEO</h3>
+      <p>Scrivimi cosa privilegiare nei prossimi giri (competitor da monitorare, keyword da evitare, pagine/sezioni da spingere). Lo uso per affinare le prossime raccomandazioni.</p>
+      <textarea id="seo-fb-testo" placeholder="Es: dai priorità al marketplace e alle risorse; monitora i competitor X e Y; evita keyword troppo generiche; punta su Discover per le news…"></textarea>
+      <div class="row"><button id="seo-fb-invia" type="button">Invia feedback</button></div>
+      <ul class="seo-fb-list" id="seo-fb-list"></ul>
+    </section>
+
+    <section>
+      <ul class="seo-list" id="lista-seo"></ul>
+    </section>
+
+    <footer>Le raccomandazioni nascono dal dry-run sul sito (Osserva → Ragiona). Stato e commenti vivono nello store · il reparto li legge per procedere. Il <b>Manuale</b> spiega come funziona.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/seo-dati.js"></script>
+  <script src="assets/seo.js"></script>
+</body>
+</html>

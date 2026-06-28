@@ -1,0 +1,542 @@
+[
+  {
+    "slug": "01-18yo-developer-sim-wheel",
+    "titolo_en": "An 18-Year-Old Is Building a Sim Racing Wheel Designed to Cut Driving Mistakes",
+    "categoria": "Community",
+    "fonte": "https://www.reddit.com/r/simracing/comments/1twqo4m/18yearold_developer_building_a_sim_racing_wheel/",
+    "asana_gid": "1215466211445530",
+    "corpo_en": "The best ideas in sim racing don't always come from the big brands. Right now r/simracing is talking about a project from an 18-year-old developer who's building a wheel with one goal: helping drivers make fewer mistakes.\n\nThe technical details are still taking shape, and he's doing something smart — handing the concept to the community to pressure-test before launch. That's the part worth watching. A teenager putting his skills and his own money on the line, then asking the people who race every day what they actually need. It's the by-racers, for-racers energy we recognize in ourselves.\n\nA launch campaign is expected soon. Will this wheel shake up the market? Nobody knows yet. But stories like this are a reminder that our community isn't just a customer base — it's an incubator. We'll be following along, and we're rooting for anyone willing to try.",
+    "corpo_it": "Le idee migliori, nel simracing, non arrivano sempre dai grandi marchi. Su r/simracing si parla del progetto di uno sviluppatore diciottenne: un volante pensato per ridurre gli errori di guida. I dettagli tecnici sono ancora in evoluzione, ma colpisce lo spirito — un ragazzo che mette competenze e soldi propri e chiede feedback a chi corre ogni giorno. È l'energia \"by racers, for racers\" in cui ci riconosciamo. La campagna di lancio è attesa a breve: storie così ricordano che la nostra community è anche un incubatore. Seguiamo, e tifiamo per chi ci prova.",
+    "brief_img": "- **Priorità:** AI concettuale (mani su un volante sim, taglio motorsport, non neon) — la più sicura.\n- **Evitare:** foto del prodotto non ancora uscito (diritti/ignoto).\n- Drive AC screenshots: non pertinenti (tema hardware/community).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://www.reddit.com/r/simracing/comments/1twqo4m/18yearold_developer_building_a_sim_racing_wheel/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "⚠️ fonte unica (Reddit). Trattare come community/rumor; verificare prima di pubblicare."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "tolto filler (\"al di là dei dettagli…\"), ritmo variato. ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "02-golden-lap-mobile",
+    "titolo_en": "Golden Lap Brings Its Minimalist F1 Strategy to iOS and Android",
+    "categoria": "Piattaforme",
+    "fonte": "https://traxion.gg/minimalist-motorsport-strategy-game-golden-lap-heading-to-mobiles/",
+    "asana_gid": "1215466281769442",
+    "corpo_en": "Sim racing isn't only wheels and pedals — sometimes it's the cold math of strategy. Golden Lap, the stripped-down management game inspired by classic Formula 1, is heading to phones. Pre-orders are open on iOS and Android, with a July launch on the way.\n\nYou play team principal: develop the car, manage your drivers, call the strategy, and keep the budget from falling apart — all wrapped in a clean, no-clutter look. It's a different muscle than wheel-to-wheel driving, but it pulls on the same thread that runs through our community: a love of the racing mind, not just the racing line.\n\nIf you like the cerebral side of motorsport, Golden Lap on mobile looks like the perfect companion for the downtime between sessions at the rig. We'll keep an eye on it — July will tell us whether the pocket version keeps the original's pull.",
+    "corpo_it": "Il simracing non è solo volanti e pedaliere: a volte è la matematica fredda della strategia. Golden Lap, lo strategy gestionale minimalista ispirato alla F1 classica, arriva su mobile — pre-ordini aperti su iOS e Android, lancio a luglio. Si veste i panni del team principal: sviluppo auto, gestione piloti, strategia e budget, con un'estetica essenziale. Per chi ama il lato cerebrale del motorsport è il compagno ideale tra una sessione e l'altra al rig. Lo terremo d'occhio: a luglio sapremo se la versione tascabile mantiene il fascino dell'originale.",
+    "brief_img": "- **Priorità:** press asset ufficiale del gioco (richiesta allo studio) → fallback AI concettuale (muretto box minimalista, stile pulito).\n- Diritti: lo screenshot del gioco è del developer; usare press kit o chiedere.",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://traxion.gg/minimalist-motorsport-strategy-game-golden-lap-heading-to-mobiles/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "data lancio \"luglio\" e pre-ordini da confermare alla fonte prima della pubblicazione."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok (\"cold math\", \"no-clutter\")."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok, concreto."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "03-lando-norris-charity-helmet",
+    "titolo_en": "Lando Norris Puts a Race-Worn Helmet Up for Charity to Fight Dementia",
+    "categoria": "Community / #SimracingForGood",
+    "fonte": "https://simracingonline.co.uk/threads/lando-norris-launches-race-worn-helmet-prize-draw-for-sir-jackie-stewarts-dementia-charity.69349/",
+    "asana_gid": "1215466227648055",
+    "corpo_en": "This is the kind of story we like to tell. McLaren's Lando Norris is running a prize draw with one of his race-worn helmets on the line, raising money for Race Against Dementia — the foundation Sir Jackie Stewart created to fund research into the disease.\n\nMotorsport turning passion into something useful is exactly the spirit behind #SimracingForGood. Our community often sits on the bridge between real racing and the virtual kind, and moments like this are a reminder that our world can do good well beyond the track.\n\nA one-of-a-kind helmet for a lucky winner, and a real contribution to a fight that touches all of us. If you love racing and want to do something good with it, this one's worth a look. Sometimes it takes very little to race for the right cause.",
+    "corpo_it": "È il genere di storia che ci piace raccontare. Lando Norris (McLaren) mette in palio un casco indossato in gara per raccogliere fondi a favore di Race Against Dementia, la fondazione di Sir Jackie Stewart contro la demenza. La passione per le corse che diventa solidarietà concreta è lo spirito di #SimracingForGood. La nostra community fa spesso da ponte tra motorsport reale e virtuale: iniziative così ricordano quanto il nostro mondo possa avere impatto oltre la pista. Un cimelio unico per i fortunati e un contributo a una battaglia che riguarda tutti.",
+    "brief_img": "- ⚠️ **Diritti pesanti:** foto F1/McLaren/Norris sono coperte da copyright — NON usarle senza licenza.\n- **Priorità:** AI concettuale rispettosa (un casco da corsa su sfondo pulito) oppure visual #SimracingForGood di brand.",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://simracingonline.co.uk/threads/lando-norris-launches-race-worn-helmet-prize-draw-for-sir-jackie-stewarts-dementia-charity.69349/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "verificare modalità/scadenza della lotteria alla fonte; è il pezzo perfetto per legare #SimracingForGood (allineato a §1)."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "04-trak-racer-simracing-expo",
+    "titolo_en": "Trak Racer Joins the SimRacing Expo in Frankfurt With Near-Final Hardware",
+    "categoria": "Hardware",
+    "fonte": "https://traxion.gg/trak-racer-joins-simracing-expo-frankfurt/",
+    "asana_gid": "1215466227622712",
+    "corpo_en": "The SimRacing Expo in Frankfurt keeps adding names, and the latest is a good one: Trak Racer, the Australian cockpit and rig maker with a strong following in our community, is confirmed. The company says it'll bring near-final products to the show — the kind of detail that matters if you're weighing a rig upgrade.\n\nThe Expo has become Europe's reference point for sim racing hardware: the place to put your hands on wheel bases, pedals, cockpits, and accessories before you decide where your money goes. Having a structural brand like Trak Racer in the hall raises the bar for this edition.\n\nFor simracers dreaming of a stiffer, more immersive setup, events like this are gold — ideas, side-by-side comparisons, and early looks at what's coming. We'll be watching the announcements out of Frankfurt closely.",
+    "corpo_it": "Il SimRacing Expo di Francoforte continua ad aggiungere espositori, e l'ultimo è di peso: Trak Racer, produttore australiano di cockpit e postazioni molto seguito dalla community, è confermato. Porterà in fiera prodotti quasi definitivi — un dettaglio che fa gola a chi valuta l'upgrade del rig. L'Expo è ormai il riferimento europeo per l'hardware: il posto dove provare con mano basi sterzo, pedaliere e cockpit prima di investire. Per chi sogna una postazione più rigida e immersiva, eventi così sono oro. Seguiremo da vicino gli annunci da Francoforte.",
+    "brief_img": "- **Priorità:** render/foto prodotto ufficiale Trak Racer (press kit) → fallback AI concettuale (cockpit/rig, stile motorsport pulito).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://traxion.gg/trak-racer-joins-simracing-expo-frankfurt/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "la card era taggata feed \"Esports\" ma il contenuto è Hardware → categoria corretta in Hardware (segnalato)."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "05-gt-world-series-milan",
+    "titolo_en": "Gran Turismo World Series 2026 Kicks Off in Milan With the Nations Cup",
+    "categoria": "Esports",
+    "fonte": "https://liquipedia.net/simracing/Gran_Turismo_World_Series/2026/Milan/Nations_Cup",
+    "asana_gid": "1215466320052710",
+    "corpo_en": "Gran Turismo's esport is back live — and it's starting in Italy. Round 1 of the Gran Turismo World Series 2026 opens in Milan, the season's first in-person event, headlined by the Nations Cup, where the best virtual drivers race for their countries.\n\nFor years the World Series has been one of the most watchable formats around, pairing the accessibility of Gran Turismo 7 with a seriously high competitive ceiling and a broadcast that holds its own against real motorsport. For fans in Italy, a season opener at home is one more reason to tune in.\n\nEyes on the home drivers: the Nations Cup is fertile ground for surprises, and an opening round often sets the tempo for the whole year. Let the season begin.",
+    "corpo_it": "L'esport di Gran Turismo torna live, e parte dall'Italia: il Round 1 della World Series 2026 si apre a Milano, primo evento dal vivo della stagione, con la Nations Cup dove i migliori piloti virtuali corrono per il proprio Paese. Da anni è uno dei format più spettacolari: accessibilità di GT7 più un livello competitivo altissimo e una produzione degna del motorsport reale. Per i tifosi italiani, un via di stagione in casa è un motivo in più per seguire. Occhi sui nostri portacolori: l'apertura detta spesso il ritmo dell'intera annata.",
+    "brief_img": "- ⚠️ **Diritti:** asset Gran Turismo/Polyphony coperti da copyright → press kit ufficiale o licenza.\n- **Priorità:** foto evento su licenza → fallback AI concettuale (atmosfera arena esports, non loghi).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://liquipedia.net/simracing/Gran_Turismo_World_Series/2026/Milan/Nations_Cup"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "confermare date/sede del Round 1 (fonte Liquipedia, community-maintained → verificare)."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "06-f1-sim-racing-champion",
+    "titolo_en": "F1 Sim Racing: Otis Lawrence Takes the Title, Red Bull Wins a Record Fourth",
+    "categoria": "Esports",
+    "fonte": "https://www.ticketnews.com/2026/06/red-bull-claims-fourth-sim-racing-constructors-crown/",
+    "asana_gid": "1215466281829547",
+    "corpo_en": "The F1 Sim Racing World Championship has wrapped a tense season. Among the drivers, it's Alpine's Otis Lawrence on the top step, claiming his first virtual world title after a fight that ran to the final rounds.\n\nAmong the teams, it's Oracle Red Bull Sim Racing once again — a fourth constructors' crown, a record that says plenty about the depth of the program behind the Austrian badge. Two storylines that together show how far F1's official esport has come.\n\nFor our community, licensed F1 sim racing is still one of the strongest shop windows for pulling new fans into the sport. Talent, structure, and a show worth watching — the ingredients to grow are all there. Now it's over to next season.",
+    "corpo_it": "Cala il sipario su una stagione intensa del F1 Sim Racing World Championship. Tra i piloti vince Otis Lawrence (Alpine), primo titolo iridato virtuale dopo un campionato combattuto fino all'ultimo round. Tra i team è ancora Oracle Red Bull Sim Racing: quarto titolo costruttori, un record che dice molto sulla profondità del progetto austriaco. Per la community, l'esport ufficiale F1 resta una delle vetrine più potenti per portare nuovi appassionati nel nostro mondo. Talento, struttura e spettacolo: gli ingredienti per crescere ci sono tutti.",
+    "brief_img": "- ⚠️ **Diritti:** asset F1/Red Bull/Alpine coperti da copyright → press kit/licenza obbligatori.\n- **Priorità:** foto su licenza → fallback AI concettuale (trofeo/podio esports, no loghi).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://www.ticketnews.com/2026/06/red-bull-claims-fourth-sim-racing-constructors-crown/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "⚠️ nomi propri (Otis Lawrence) e \"quarto titolo\" da verificare su fonte ufficiale prima di pubblicare — sono claim falsificabili."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "07-iracing-bmw-gtp",
+    "titolo_en": "iRacing Shows Off an Upgraded BMW GTP as Detail Keeps Climbing",
+    "categoria": "Sim Title Update",
+    "fonte": "https://traxion.gg/iracing-showcases-upgraded-bmw-gtp/",
+    "asana_gid": "1215466281757737",
+    "corpo_en": "iRacing keeps tending its endurance fleet. This time the spotlight's on the BMW M Hybrid V8 in GTP trim, shown in an upgraded, more faithful version. GTP is one of the most-followed classes in modern prototype racing, front and center in both IMSA and the big endurance rounds.\n\nFor the Boston platform, this kind of attention to its flagship cars isn't just cosmetic. More accurate models mean more coherent behavior and feel — and that matters for the leagues and official events that fill our community's weekends.\n\nIf you race the prototype series, you'll appreciate the upgrade. It's another piece of iRacing's strategy to keep its car list in step with real motorsport, where the Hypercar/GTP category is living through a new golden age.",
+    "corpo_it": "iRacing continua a curare la flotta endurance: riflettori sulla BMW M Hybrid V8 in configurazione GTP, mostrata aggiornata e più fedele. La GTP è una delle classi più seguite del prototipo moderno, protagonista in IMSA e nelle grandi endurance. Per la piattaforma di Boston l'attenzione alle auto di punta non è solo estetica: modelli più accurati significano comportamento e feeling più coerenti, cruciali per leghe ed eventi ufficiali. Chi corre nelle serie prototipo apprezzerà l'upgrade — un altro tassello per tenere il parco auto al passo col motorsport reale.",
+    "brief_img": "- ⚠️ **Diritti:** render iRacing/BMW coperti → press kit/licenza.\n- **Priorità:** screenshot ufficiale su licenza → fallback AI concettuale (prototipo GTP, no marchi).\n- Drive AC screenshots: non pertinenti (sim diverso).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://traxion.gg/iracing-showcases-upgraded-bmw-gtp/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "fonte singola (traxion) → ok come news di settore, verificare se serve la data."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "08-fanatec-fullforce-free",
+    "titolo_en": "Fanatec Confirms Free FullForce for the CSL DD and GT DD Pro",
+    "categoria": "Hardware",
+    "fonte": "https://www.overtake.gg/news/fanatec-confirms-rumored-free-fullforce-software-upgrade-for-csl-dd-users.4555/",
+    "asana_gid": "1215466211445516",
+    "corpo_en": "Good news if you already own a CSL DD or a Gran Turismo DD Pro: Fanatec has confirmed that FullForce — until now reserved for its higher tiers — is coming to these bases for free, via a software update. No new hardware to buy, just more detail in your force feedback.\n\nFullForce enriches what the wheel sends back: beyond the usual steering forces, it adds effects like ABS, tire lockup, and impacts, as long as the title supports them. That's a real step up in immersion for no extra spend.\n\nThe move rewards people who already own these products — a choice the community appreciates in a market where progress too often runs through your wallet. Paired with the announced new Podium Pedals, it's a good moment for the ecosystem. Stay tuned for the official rollout date.",
+    "corpo_it": "Buone notizie per chi ha già una CSL DD o una Gran Turismo DD Pro: Fanatec conferma che FullForce — finora riservata alle fasce alte — arriva su queste basi gratis, via aggiornamento software. Niente hardware nuovo, solo più dettaglio nel force feedback. FullForce arricchisce il segnale del volante: oltre alle forze di sterzo, restituisce ABS, bloccaggio gomme e impatti, dove il titolo li supporta. Un salto di immersione a costo zero. Una mossa che premia chi già possiede questi prodotti — apprezzata in un mercato dove troppo spesso il progresso passa dal portafoglio. Restate sintonizzati per la data di rollout.",
+    "brief_img": "- **Priorità:** render/foto prodotto Fanatec (press kit) → fallback AI concettuale (base direct drive, dettaglio, stile pulito).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://www.overtake.gg/news/fanatec-confirms-rumored-free-fullforce-software-upgrade-for-csl-dd-users.4555/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "la card era taggata feed \"Fanatec…\" → categoria Hardware corretta. Confermare che l'annuncio sia ufficiale (titolo fonte dice \"confirms\")."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok (\"tire lockup\", US spelling)."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "09-le-mans-ultimate-2026-update",
+    "titolo_en": "Le Mans Ultimate Drops Its 2026 Season Update — Free Content, Right on Le Mans Week",
+    "categoria": "Sim Title Update",
+    "fonte": "https://boxthislap.org/le-mans-ultimate-2026-season-update-new-free-content/",
+    "asana_gid": "1215466211436846",
+    "corpo_en": "The timing isn't an accident. Studio 397 has rolled out the 2026 Season update for Le Mans Ultimate (version 1.3.3), picking the most iconic week on the endurance calendar to ship new free content and a round of community-requested fixes.\n\nThe package fits the official FIA WEC simulator's steady climb — recent months have gone heavy on stability, the online system, and driving quality. For endurance purists, LMU is still the reference when you want the tension of a double stint and real race strategy across the Hypercar and GT3 classes.\n\nWith the 24 Hours at the door, it's the perfect moment to get on track and try the new content. The atmosphere at the Sarthe doesn't wait — helmet on, and go.",
+    "corpo_it": "Il tempismo non è casuale. Studio 397 rilascia l'update Season 2026 di Le Mans Ultimate (versione 1.3.3) nella settimana più iconica del calendario endurance, con contenuti gratuiti e rifiniture chieste dalla community. Il pacchetto si inserisce nella crescita del simulatore ufficiale del FIA WEC, che ha lavorato molto su stabilità, sistema online e qualità di guida. Per i puristi dell'endurance, LMU resta il riferimento per la tensione di un doppio stint e la strategia nelle classi Hypercar e GT3. Con la 24 Ore alle porte, è il momento giusto per scendere in pista.",
+    "brief_img": "- ⚠️ **Diritti:** asset LMU/Studio 397 coperti → press kit/licenza.\n- **Priorità:** screenshot ufficiale su licenza → fallback AI concettuale (notte endurance, fari in pista, no marchi).",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://boxthislap.org/le-mans-ultimate-2026-season-update-new-free-content/"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "versione \"1.3.3\" e contenuti specifici da confermare alla fonte prima di pubblicare."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  },
+  {
+    "slug": "10-assetto-corsa-evo-0-7",
+    "titolo_en": "Assetto Corsa EVO 0.7: Four New Cars, an Official SDK, and Safety Rating",
+    "categoria": "Sim Title Update",
+    "fonte": "https://vpesports.com/featured-news/assetto-corsa-evo-0-7-audi-porsche-datsun-and-the-official-sdk",
+    "asana_gid": "1215466227592484",
+    "corpo_en": "Kunos is raising the Early Access bar. The 0.7 update for Assetto Corsa EVO brings four new cars, a redesigned particle system, Safety Rating, and — finally — the official modding SDK.\n\nThis is one of those updates the community had been waiting for: not a light touch, but a real step toward the game's maturity. On the content side, four new cars arrive, led by the Audi R8 LMS GT3 Evo II, already turning up in early onboard laps at Spa and the Nurburgring.\n\nBut the real headline, if you care about longevity, is the official SDK — the tool that opens the door to structured modding, exactly what made the first Assetto Corsa a legend. Together with the new particle system and Safety Rating, Kunos is sending a clear message about where this project is headed: serious simulation, community-made content, and clean racing.\n\nFor us simracers, it's a sign that EVO is laying the right foundations. We'll stay trackside — the next updates will tell us whether the promise holds.",
+    "corpo_it": "Kunos alza l'asticella dell'Early Access. L'update 0.7 di Assetto Corsa EVO porta quattro nuove auto, un sistema di particelle ridisegnato, il Safety Rating e — finalmente — l'SDK ufficiale per il modding. Uno di quei momenti che la community aspettava: non un ritocco, ma un passo verso la maturità del titolo. Tra i contenuti spicca l'Audi R8 LMS GT3 Evo II, già vista nelle prime onboard a Spa e al Nurburgring. Ma la vera notizia, per chi vive di longevità, è l'SDK ufficiale: lo strumento che apre al modding strutturato, ciò che ha reso leggendario il primo Assetto Corsa. Un messaggio chiaro sulla direzione: simulazione seria, contenuti della community, racing pulito.",
+    "brief_img": "- ✅ **Match con la libreria Drive:** ci sono 38 screenshot in-game di Assetto Corsa — **perfetti per questo pezzo**.\n- **Gate:** usarli **solo dopo** conferma autorizzazione di gyenisp@gmail.com (vedi §5.2 punto 7).\n- Fallback: press shot ufficiale Kunos su licenza → AI concettuale.",
+    "passaggi": [
+      {
+        "ord": 1,
+        "passo": "Rilevamento (News Scout)",
+        "esito": "da feed",
+        "nota": "Fonte: https://vpesports.com/featured-news/assetto-corsa-evo-0-7-audi-porsche-datsun-and-the-official-sdk"
+      },
+      {
+        "ord": 2,
+        "passo": "Writer — EN_US dalla base IT",
+        "esito": "fatto",
+        "nota": ""
+      },
+      {
+        "ord": 3,
+        "passo": "Editor + fact-check",
+        "esito": "fatto",
+        "nota": "elenco auto e feature 0.7 da confermare alla fonte; ottimo candidato Discover (sim update fresco + immagini disponibili)."
+      },
+      {
+        "ord": 4,
+        "passo": "Revisore lingua US",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 5,
+        "passo": "Revisore Anti-AI",
+        "esito": "fatto",
+        "nota": "ok."
+      },
+      {
+        "ord": 6,
+        "passo": "Visual — brief immagine",
+        "esito": "brief pronto",
+        "nota": "immagine da generare"
+      },
+      {
+        "ord": 7,
+        "passo": "Preparatore IT",
+        "esito": "fatto",
+        "nota": "versione IT per approvazione pronta"
+      }
+    ]
+  }
+]
