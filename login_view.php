@@ -25,8 +25,9 @@
       border-radius:10px; color:var(--text); font-size:15px; outline:none; }
     input:focus { border-color:var(--accent); }
     button { width:100%; margin-top:18px; padding:12px; border:0; border-radius:10px;
-      background:var(--accent); color:#fff; font-size:15px; font-weight:600; cursor:pointer; }
+      background:#2563eb; color:#fff; font-size:15px; font-weight:600; cursor:pointer; }
     button:hover { filter:brightness(1.08); }
+    :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:8px; }
     .err { margin-top:14px; background:#3a1620; border:1px solid #6d2535; color:#ffb3c0;
       padding:10px 12px; border-radius:10px; font-size:13px; }
     .g-recaptcha { margin-top:16px; display:flex; justify-content:center; }

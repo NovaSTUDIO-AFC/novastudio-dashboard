@@ -10,6 +10,7 @@
   --text:      #e6edf6;
   --text-dim:  #93a3bd;
   --accent:    #4f8cff;
+  --accent-btn:#2563eb;   /* fill bottoni: 5.17:1 con bianco (AA). --accent resta per testo/bordi */
   --accent-2:  #34d399;
   --warn:      #f6c343;
   --mono:      ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -19,6 +20,26 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Accessibilità: focus da tastiera visibile ovunque (WCAG 2.4.7 AA) ── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* ── Skip-link "salta al contenuto" (WCAG 2.4.1 A) ── */
+.skip-link {
+  position: fixed; left: 10px; top: -56px; z-index: 200;
+  background: var(--accent-btn); color: #fff; font-weight: 600;
+  padding: 10px 16px; border-radius: 10px; text-decoration: none;
+  transition: top .15s;
+}
+.skip-link:focus { top: 10px; }
+
+/* ── Rispetta "riduci movimento" (WCAG 2.3.3) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+}
 
 html, body { width: 100%; overflow-x: hidden; }
 
@@ -52,7 +73,7 @@ body {
 .gate-box input:focus { outline: 2px solid var(--accent); border-color: transparent; }
 .gate-box button {
   width: 100%; padding: 12px; border-radius: 10px; border: none;
-  background: var(--accent); color: #fff; font-size: 1rem; font-weight: 600;
+  background: var(--accent-btn); color: #fff; font-size: 1rem; font-weight: 600;
   cursor: pointer; transition: filter .15s;
 }
 .gate-box button:hover { filter: brightness(1.1); }
@@ -103,7 +124,7 @@ body {
   flex: 1; padding: 8px 10px; border: 1px solid var(--border); background: var(--card-2);
   color: var(--text-dim); border-radius: 9px; cursor: pointer; font-size: .82rem; font-weight: 600;
 }
-.proj-chip.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+.proj-chip.active { color: #fff; background: var(--accent-btn); border-color: var(--accent-btn); }
 .nav-section {
   font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
   color: var(--text-dim); margin: 10px 6px 3px;
@@ -120,6 +141,21 @@ body {
   margin: 2px 0 2px 12px; border-left: 1px solid var(--border); padding-left: 6px;
 }
 .nav-sub.open { display: flex; }
+
+/* ── Accordion progetti (selettore reparti): tutti visibili, uno aperto ── */
+.nav-proj {
+  display: flex; align-items: center; gap: 6px; width: 100%; margin-top: 6px;
+  background: var(--card-2); border: 1px solid var(--border); color: var(--text);
+  font-size: .92rem; font-weight: 700; text-align: left;
+  padding: 10px 12px; border-radius: 9px; cursor: pointer;
+}
+.nav-proj:hover { border-color: var(--accent); }
+.nav-proj.open { color: var(--accent); border-color: rgba(79,140,255,.4); background: rgba(79,140,255,.10); }
+.nav-proj .nav-proj-nm { flex: 1; }
+.nav-proj .caret { opacity: .6; font-size: .8rem; transition: transform .15s; }
+.nav-proj.open .caret { transform: rotate(180deg); }
+.nav-proj-body { display: none; padding: 2px 0 6px 6px; }
+.nav-proj-body.open { display: block; }
 .nav-bread {
   max-width: 1100px; margin: 0 auto; padding: 12px 20px 0;
   color: var(--text-dim); font-size: .8rem;
@@ -161,17 +197,17 @@ section > h2 {
   border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
 }
 
-/* ── Homepage ── */
-.hero { text-align: center; padding: 48px 12px 28px; }
+/* ── Homepage ── (hero compatto: le aree salgono sopra la piega) */
+.hero { text-align: center; padding: 24px 12px 12px; }
 .hero-logo {
-  font-size: 2.4rem; color: var(--accent);
-  width: 80px; height: 80px; margin: 0 auto 16px;
+  font-size: 1.8rem; color: var(--accent);
+  width: 56px; height: 56px; margin: 0 auto 12px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(79,140,255,.1); border: 1px solid rgba(79,140,255,.3);
   border-radius: 50%; overflow: hidden;
 }
-.hero-logo img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
-.hero h1 { font-size: 2.2rem; letter-spacing: -.03em; margin-bottom: 10px; }
+.hero-logo img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+.hero h1 { font-size: 1.6rem; letter-spacing: -.03em; margin-bottom: 6px; }
 .hero-sub { color: var(--text-dim); max-width: 480px; margin: 0 auto; }
 
 .area {
@@ -253,8 +289,8 @@ footer { color: var(--text-dim); font-size: .8rem; text-align: center; margin-to
   .nav-link { padding: 11px 13px; }
 
   .wrap { padding: 22px 14px 56px; }
-  .hero { padding: 32px 8px 20px; }
-  .hero h1 { font-size: 1.8rem; }
+  .hero { padding: 18px 8px 10px; }
+  .hero h1 { font-size: 1.45rem; }
   header.top h1 { font-size: 1.3rem; }
   .grid-cards { grid-template-columns: 1fr; }
   .node-label { font-size: 15px; }
@@ -263,4 +299,31 @@ footer { color: var(--text-dim); font-size: .8rem; text-align: center; margin-to
 
 @media (max-width: 380px) {
   .short-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ── Desktop (≥1000px): navigazione SEMPRE visibile come sidebar fissa ──
+   Su mobile/tablet resta il drawer con "☰ Menu". Qui niente click per
+   vedere il menu: l'albero è docato a sinistra, il contenuto scorre a destra.
+   Solo CSS: nessuna pagina toccata, nessun JS. Reversibile. */
+@media (min-width: 1000px) {
+  body { padding-left: 264px; }                 /* spazio per la sidebar */
+  .nav-toggle { display: none; }                /* niente hamburger su desktop */
+  .site-header {
+    position: fixed; top: 0; left: 0; bottom: 0; width: 264px;
+    border-bottom: 0; border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .site-header .nav-inner {
+    flex-direction: column; align-items: stretch;
+    max-width: none; margin: 0; padding: 16px 14px; gap: 8px;
+  }
+  .site-header .brand { font-size: 1.1rem; padding: 2px 6px 6px; }
+  .nav-links {
+    display: flex; position: static; width: 100%;
+    flex-direction: column; gap: 2px; margin: 0; padding: 0;
+    background: none; border: 0; box-shadow: none;
+    max-height: none; overflow: visible;
+  }
+  /* il contenuto è già spostato dal padding del body: centratura normale */
+  .nav-bread, .wrap { margin-left: auto; margin-right: auto; }
 }
