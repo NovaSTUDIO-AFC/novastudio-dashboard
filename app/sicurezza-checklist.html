@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Sicurezza — Checklist password — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .ck-intro { background:#1a1014; border:1px solid #7a2330; border-radius:12px; padding:13px 15px; margin-bottom:16px; font-size:14px; line-height:1.55; color:#ffd9df; }
+    .ck-prog { position:sticky; top:8px; z-index:5; background:#101826; border:1px solid #243049; border-radius:12px; padding:11px 14px; margin-bottom:18px; }
+    .ck-prog .bar { height:8px; background:#0e1622; border-radius:999px; overflow:hidden; margin-top:7px; }
+    .ck-prog .bar > i { display:block; height:100%; width:0; background:#1f7a4d; transition:width .25s; }
+    .ck-prog .lbl { font-size:13px; color:#9cc0ff; font-weight:600; }
+    .ck-group { margin-bottom:16px; }
+    .ck-group > h2 { font-size:15px; margin:0 0 8px; }
+    .ck-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+    .ck-item { display:flex; gap:11px; align-items:flex-start; background:#121a28; border:1px solid #243049;
+      border-radius:11px; padding:11px 13px; cursor:pointer; }
+    .ck-item.done { opacity:.5; border-color:#2e7d51; }
+    .ck-item input { margin-top:3px; width:18px; height:18px; flex-shrink:0; accent-color:#1f7a4d; cursor:pointer; }
+    .ck-item .txt { font-size:14px; line-height:1.5; color:#dce6f3; }
+    .ck-item.done .txt { text-decoration:line-through; }
+    .ck-item .txt code { background:#0e1622; border:1px solid #243049; border-radius:6px; padding:1px 6px; font-size:13px; }
+    .ck-p { font-size:11px; font-weight:700; border-radius:999px; padding:2px 8px; white-space:nowrap; }
+    .ck-p.p1 { background:#7a2330; color:#ff9bab; }
+    .ck-p.p2 { background:#7a2330; color:#ff9bab; }
+    .ck-p.p3 { background:#3a2c12; color:#ffce85; }
+    .ck-p.p4 { background:#3a2c12; color:#ffce85; }
+    .ck-p.p5 { background:#2a2f12; color:#e3e085; }
+    .ck-p.p6 { background:#0e1622; color:#8aa0bd; border:1px solid #243049; }
+    .ck-note { font-size:13px; color:#8aa0bd; line-height:1.5; margin:4px 0 10px; }
+    .ck-reset { margin-top:10px; background:none; border:1px solid #243049; color:#8aa0bd; border-radius:9px; padding:7px 12px; cursor:pointer; font-size:13px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Checklist — Cambio password post-incidente</h1>
+        <div class="sub">Le spunte restano salvate su questo dispositivo. Procedi dall'alto: l'ordine è per rischio reale.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="ck-conta">—</span></span>
+    </header>
+
+    <div class="ck-intro">
+      <b>Perché:</b> due siti dell'account avevano backdoor PHP, e due backup con
+      <code>wp-config.php</code> (password database in chiaro) erano scaricabili pubblicamente.
+      Finché non ruoti le credenziali, chi le ha prese può rientrare.
+    </div>
+
+    <div class="ck-prog">
+      <div class="lbl"><span id="ck-fatti">0</span> / <span id="ck-tot">0</span> completati</div>
+      <div class="bar"><i id="ck-bar"></i></div>
+    </div>
+
+    <div id="ck-root"></div>
+
+    <button class="ck-reset" id="ck-reset" type="button">↺ Azzera le spunte</button>
+
+    <footer>Cosa posso fare io al posto tuo (dimmelo o dammi i valori nuovi): aggiornare i <code>wp-config.php</code>, ruotare la chiave SSH, eliminare le quarantene, rifare la scansione di conferma. I login al pannello (account, 2FA, FTP, password DB) li fai tu. Dettaglio completo: <code>~/Workspace/SICUREZZA-checklist-cambio-password.md</code>.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/sicurezza-checklist.js"></script>
+</body>
+</html>

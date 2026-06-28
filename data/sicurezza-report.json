@@ -1,0 +1,62 @@
+{
+  "quando": "2026-06-28 09:06:23",
+  "dominî": [
+    {
+      "dominio": "afciaccio.it",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 0
+    },
+    {
+      "dominio": "simracing.fan",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 5945
+    },
+    {
+      "dominio": "novastudio.company",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 13
+    },
+    {
+      "dominio": "analytics.simracing.fan",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 34
+    },
+    {
+      "dominio": "migliorpcgaming.it",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 1813
+    },
+    {
+      "dominio": "manueltiago.it",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 0
+    },
+    {
+      "dominio": "mediumvioletred-badger-290948.hostingersite.com",
+      "ioc_file": 0,
+      "cartelle_rogue": 0,
+      "firme": 0,
+      "php_in_upload": 0,
+      "php_recenti": 1814
+    }
+  ],
+  "allarmi": []
+}

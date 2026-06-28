@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Sicurezza — Manuale — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .doc { line-height:1.6; color:#dce6f3; }
+    .doc h2 { font-size:17px; margin:22px 0 8px; color:#9cc0ff; }
+    .doc p, .doc li { font-size:14px; }
+    .doc ul { padding-left:20px; display:flex; flex-direction:column; gap:5px; }
+    .doc code { background:#0e1622; border:1px solid #243049; border-radius:6px; padding:1px 6px; font-size:13px; }
+    .doc .card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Sicurezza — Manuale</h1>
+        <div class="sub">Come funziona il Reparto Sicurezza siti &amp; server.</div>
+      </div>
+    </header>
+
+    <div class="doc">
+      <div class="card">
+        <h2>Obiettivo</h2>
+        <p>Tenere puliti e operativi i siti e i server NovaSTUDIO, e accorgersi <b>prima</b>
+        che un sito venga compromesso. Il numero dell'Head:
+        <b>nessun dominio resta compromesso senza essere rilevato oltre 7 giorni.</b></p>
+      </div>
+
+      <div class="card">
+        <h2>Come funziona (Osserva → Ragiona → Agisci)</h2>
+        <ul>
+          <li><b>Osserva</b> — ogni lunedì 08:00 uno sweep <b>read-only</b> gira su tutti i
+          domini dell'account Hostinger. È deterministico (niente AI, costo ~0): cerca firme
+          e IOC del malware noto, PHP nelle cartelle upload, cartelle sospette.</li>
+          <li><b>Ragiona</b> — classifica ogni sito <b>pulito / da controllare</b> con il
+          dettaglio dei segnali trovati.</li>
+          <li><b>Agisci</b> — se trova qualcosa avvisa su <b>Slack</b>. La verifica
+          approfondita (giudizio) e la bonifica le fa <b>Max</b> a chiamata: scrivi
+          <code>scansiona a fondo &lt;dominio&gt;</code>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>La regola d'oro (autonomia)</h2>
+        <ul>
+          <li><b>Reversibile</b> (mettere in quarantena un file malevolo, fuori dal web)
+          → Max <b>fa e riporta</b>.</li>
+          <li><b>Irreversibile</b> (cancellare definitivamente, rimuovere WordPress,
+          ripristinare da backup) → Max <b>chiede la tua approvazione</b>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Cosa NON fa (ancora)</h2>
+        <p>Niente WAF/firewall applicativo, niente hardening avanzato, niente pentest
+        offensivo. E il <b>Custode Disaster Recovery</b> (backup off-site verificati +
+        runbook di ripristino) è il prossimo passo previsto.</p>
+      </div>
+
+      <div class="card">
+        <h2>In caso di incidente</h2>
+        <p>Esiste una <b>checklist post-incidente</b> (cambio password account, admin
+        WordPress, database, FTP, chiavi) affidata a questo reparto. Quando un sito risulta
+        compromesso, dopo la bonifica si esegue quella checklist per chiudere la porta.</p>
+      </div>
+    </div>
+
+    <footer>Documento di progetto completo: <code>~/Workspace/sicurezza-linee-guida.md</code>.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

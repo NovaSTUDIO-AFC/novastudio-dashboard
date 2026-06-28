@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Sicurezza — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .sec-quando { color:#8aa0bd; font-size:13px; margin-bottom:14px; }
+    .sec-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+    .sec-card { background:#121a28; border:1px solid #243049; border-radius:12px; padding:13px 15px;
+      display:flex; align-items:center; gap:12px; }
+    .sec-card.allarme { border-color:#7a2330; background:#1a1014; }
+    .sec-dot { font-size:18px; }
+    .sec-dom { font-weight:700; font-size:15px; flex:1; word-break:break-all; }
+    .sec-meta { font-size:12px; color:#8aa0bd; }
+    .sec-meta.bad { color:#ff9bab; font-weight:700; }
+    .sec-vuoto { color:#8aa0bd; font-size:14px; padding:10px 2px; }
+    .sec-banner { border-radius:12px; padding:13px 15px; margin-bottom:16px; font-size:14px; line-height:1.5; }
+    .sec-banner.ok  { background:#143524; color:#9fe6bd; border:1px solid #2e7d51; }
+    .sec-banner.ko  { background:#3a1820; color:#ffb3bf; border:1px solid #7a2330; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Sicurezza — Stato siti</h1>
+        <div class="sub">Esito dell'ultima scansione settimanale (sola misura, read-only). La bonifica resta un gesto umano con Max.</div>
+      </div>
+      <span class="badge"><span class="dot"></span> <span id="sec-conta">—</span></span>
+    </header>
+
+    <div id="sec-banner"></div>
+    <div class="sec-quando" id="sec-quando"></div>
+
+    <section>
+      <ul class="sec-list" id="lista-sec"></ul>
+    </section>
+
+    <footer>Lo sweep gira ogni lunedì 08:00 sul Mac mini: cerca firme/IOC noti, PHP nelle upload e cartelle sospette. Se trova qualcosa avvisa su Slack → chiedi a Max <b>"scansiona a fondo &lt;dominio&gt;"</b> per la verifica completa. Il <b>Manuale</b> spiega tutto.</footer>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/sicurezza-dati.js"></script>
+  <script src="assets/sicurezza.js"></script>
+</body>
+</html>
