@@ -35,6 +35,7 @@ const TREE = [
         { label: "Commerciale", icon: "🤝", children: [
           { label: "Coda prospect", href: "commerciale.html", icon: "✅", sez: "commerciale", desc: "Prospect outbound con email già pronta: approva, chiedi modifiche o rifiuta. Niente parte senza il tuo ok." },
         ]},
+        { label: "Analytics", href: "analytics.html", icon: "📊", sez: "analytics", desc: "Guida & checklist: quali fonti dati collegare (GA4, Matomo, Woo, Search Console, Meta, Merchant…), come e in che ordine. Da fare con calma." },
         { label: "Posta", href: "posta.html", icon: "📬", sez: "posta", desc: "Caselle email, agenti del reparto e automazioni della posta." },
       ]},
       { label: "Asset", items: [] }, // libreria foto, ecc. — in arrivo
