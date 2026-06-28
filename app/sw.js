@@ -12,6 +12,7 @@ const CACHE = "novastudio-v4";
 const NO_CACHE = [
   "assets/permessi.js", "assets/catalogo.js", "assets/stato-osservato.js",
   "assets/attivita-dati.js", "assets/redazione-dati.js",
+  "assets/commerciale-dati.js",
   "assets/job-dati.js", "assets/seo-dati.js", "assets/pezzo-dati.js",
 ];
 
