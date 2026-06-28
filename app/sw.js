@@ -6,12 +6,13 @@
 // mai. skipWaiting + clients.claim → il nuovo SW prende subito il
 // controllo; pwa.js poi ricarica la pagina una volta sola.
 // ───────────────────────────────────────────────────────────────
-const CACHE = "novastudio-v3";
+const CACHE = "novastudio-v4";
 
 // Mai in cache: contenuti per-utente o dati vivi (endpoint dinamici).
 const NO_CACHE = [
   "assets/permessi.js", "assets/catalogo.js", "assets/stato-osservato.js",
   "assets/attivita-dati.js", "assets/redazione-dati.js",
+  "assets/job-dati.js", "assets/seo-dati.js", "assets/pezzo-dati.js",
 ];
 
 self.addEventListener("install", (e) => {
