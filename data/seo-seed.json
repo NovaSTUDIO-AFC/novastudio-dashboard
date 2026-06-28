@@ -1,110 +1,119 @@
 [
   {
-    "slug": "interruttore-lancio-noindex",
-    "titolo": "Interruttore di LANCIO: il sito e noindex di proposito (pre-lancio)",
-    "url": "https://simracing.fan/",
-    "tipo": "lancio",
-    "priorita": "basso",
-    "descrizione": "Verificato live 2026-06-28: tutto il sito e <meta robots=noindex,nofollow> — confermato da Fabio come SCELTA (pre-lancio), non un bug. Niente da indicizzare finche e privato. Tutte le altre voci qui sotto sono PREPARAZIONE AL LANCIO: si fanno ora, da privati, cosi al lancio il sito e gia pulito.",
-    "azione_suggerita": "NON toccare ora. Questo e l'ULTIMO passo, quando decidi di lanciare: WP -> Impostazioni -> Lettura -> togli 'Scoraggia i motori di ricerca' -> Salva; poi in GSC Richiedi indicizzazione. Da fare solo dopo che la checklist pre-lancio (sotto) e completa."
-  },
-  {
-    "slug": "resources-cpt-fuori-sitemap",
-    "titolo": "Risorse (CPT) live ma fuori dal sitemap",
-    "url": "https://simracing.fan/resources/",
-    "tipo": "indicizzazione",
-    "priorita": "alto",
-    "descrizione": "/resources/ risponde 200 (archivio CPT Risorse attivo) ma il sitemap_index contiene solo post/page/product/category: le Risorse sono invisibili a Google.",
-    "azione_suggerita": "Rank Math → Sitemap → abilitare il post type 'resource'. Verificare poi che le risorse compaiano in un resource-sitemap.xml."
-  },
-  {
-    "slug": "gruppi-buddypress-fuori-sitemap",
-    "titolo": "Gruppi/Discussioni (BuddyPress) fuori dal sitemap",
-    "url": "https://simracing.fan/groups/",
-    "tipo": "indicizzazione",
-    "priorita": "alto",
-    "descrizione": "/groups/ risponde 200 ma i gruppi pubblici e le discussioni non sono nel sitemap: contenuto community non indicizzato.",
-    "azione_suggerita": "Decidere quali gruppi pubblici indicizzare (no profili privati), aggiungerli al sitemap o creare un indice navigabile dei gruppi pubblici."
-  },
-  {
-    "slug": "junk-products-nel-feed",
-    "titolo": "Prodotti test/junk nel sitemap prodotti",
-    "url": "https://simracing.fan/product-sitemap.xml",
+    "slug": "demo-products-delete",
+    "titolo": "BLOCCANTE: cancellare i ~14 prodotti demo WooCommerce",
+    "url": "https://simracing.fan/store/uncategorized/",
     "tipo": "ecommerce",
     "priorita": "alto",
-    "descrizione": "Verificato live: TUTTI i 14 prodotti nel product-sitemap sono i campioni demo di default di WooCommerce (polo, sunglasses, beanie, album, single, 'wordpress-pennant', 'reverse-withdrawal-payment', t-shirt/hoodie demo). Nessun prodotto vendor reale e nel sitemap. Quando il sito tornera indicizzabile, Google vedrebbe dati di esempio.",
-    "azione_suggerita": "WooCommerce -> Prodotti: CANCELLARE i 14 prodotti demo (sono i sample di WooCommerce, non il marketplace). Poi pubblicare/verificare i prodotti vendor WCFM reali. Da fare prima/insieme alla rimozione del noindex."
+    "descrizione": "Verificato: 188 prodotti vendor REALI esistono (URL puliti /store/{cat}/{nome}/), ma ci sono ~14 campioni demo di default sotto /store/uncategorized/ (polo, sunglasses, beanie, album, single, wordpress-pennant, reverse-withdrawal-payment). Al lancio Google li vedrebbe come negozio.",
+    "azione_suggerita": "WooCommerce -> Prodotti: cancellare i 14 demo sotto /store/uncategorized/. I 188 reali restano."
   },
   {
-    "slug": "homepage-senza-og-image",
-    "titolo": "Homepage senza og:image",
+    "slug": "rankmath-index-decision",
+    "titolo": "BLOCCANTE: decidere COSA indicizzare (Rank Math, per tipo)",
+    "url": "https://simracing.fan/",
+    "tipo": "indicizzazione",
+    "priorita": "alto",
+    "descrizione": "Oggi e tutto noindex globale. Al lancio non si mette tutto a index alla cieca: serve decidere per tipo. SI: post, pagine, resources, events, prodotti reali, archivi categoria resource/product/event. NO: carrello, checkout, mio-account, ricerca, /store/uncategorized/, profili membro privati, archivi vuoti.",
+    "azione_suggerita": "Rank Math -> Impostazioni titoli -> per ogni tipo di contenuto impostare index/noindex secondo la mappa. Il reparto prepara la mappa esatta."
+  },
+  {
+    "slug": "sitemap-include-cpt",
+    "titolo": "BLOCCANTE: sitemap deve includere resources + events",
+    "url": "https://simracing.fan/sitemap_index.xml",
+    "tipo": "indicizzazione",
+    "priorita": "alto",
+    "descrizione": "Ora sitemap_index ha solo post/page/product/category: resources (22) ed events (18) mancano perche noindex. Quando li metti a index devono comparire nel sitemap (la struttura URL e gia corretta).",
+    "azione_suggerita": "Rank Math -> Sitemap -> Post Types: abilitare resource ed event. Verificare al lancio che compaiano i relativi sotto-sitemap."
+  },
+  {
+    "slug": "homepage-og-image",
+    "titolo": "BLOCCANTE: homepage senza og:image",
     "url": "https://simracing.fan/",
     "tipo": "schema_social",
     "priorita": "alto",
-    "descrizione": "La homepage non espone meta og:image: condivisioni social e idoneita Discover penalizzate (anteprime senza immagine).",
-    "azione_suggerita": "Impostare og:image brand 1200x630 in Rank Math (Social) per la home e i template principali. Generabile con seo-image-gen/Art."
+    "descrizione": "La home non espone og:image (i post si). Prima impressione su social e Discover penalizzata.",
+    "azione_suggerita": "Rank Math -> Impostazioni generali -> Social Meta: immagine 1200x630 brand per la home (e default sito). Generabile con Art/seo-image-gen."
   },
   {
-    "slug": "blog-dormiente-accendere",
-    "titolo": "Blog quasi vuoto in produzione vs 200+ bozze pronte",
-    "url": "https://simracing.fan/blog/",
-    "tipo": "contenuto",
+    "slug": "resource-test-uncategorized",
+    "titolo": "Pulire la risorsa di test sotto /resources/uncategorized/",
+    "url": "https://simracing.fan/resources/uncategorized/test-setup-acc-spa-francorchamps/",
+    "tipo": "indicizzazione",
     "priorita": "medio",
-    "descrizione": "Il post-sitemap mostra pochissimi post pubblicati mentre 200+ bozze EN_US sono pronte/dormienti in Asana (Reparto Redazione). Valore esterno spento.",
-    "azione_suggerita": "Coordinare con la Redazione la pubblicazione dei primi 10-20 evergreen prioritari (con immagine + Article schema). Accendere il dormiente."
+    "descrizione": "Una risorsa e sotto 'uncategorized' (l'archivio /resources/uncategorized/ fa 404). Sembra un test.",
+    "azione_suggerita": "Assegnarle una resource-category vera oppure cancellarla."
   },
   {
-    "slug": "doppia-struttura-store",
-    "titolo": "Doppia struttura store /negozio/ + /store/",
-    "url": "https://simracing.fan/negozio/",
-    "tipo": "tecnico",
-    "priorita": "medio",
-    "descrizione": "Coesistono /negozio/ (IT) e /store/... : rischio contenuti duplicati e diluizione canonical sulle pagine prodotto/categoria.",
-    "azione_suggerita": "Verificare canonical e redirect: scegliere una struttura URL primaria, 301 dell'altra, canonical coerenti."
-  },
-  {
-    "slug": "mix-lingua-senza-hreflang",
-    "titolo": "Contenuti misti IT/EN senza hreflang",
+    "slug": "lingua-hreflang",
+    "titolo": "Lingua: EN primaria + gestire i pochi contenuti IT",
     "url": "https://simracing.fan/",
     "tipo": "internazionale",
     "priorita": "medio",
-    "descrizione": "Post e pagine mescolano italiano e inglese senza hreflang: targeting linguistico confuso per Google.",
-    "azione_suggerita": "Definire EN_US come lingua primaria (allineato alla Redazione); per i contenuti IT, hreflang o sezione/sottodominio dedicato."
+    "descrizione": "Contenuti misti IT/EN senza hreflang. EN e la lingua di pubblicazione (allineato alla Redazione).",
+    "azione_suggerita": "Impostare EN primaria; per i contenuti IT: tradurre, spostare o hreflang. Decisione di Fabio."
   },
   {
-    "slug": "discover-readiness-post",
-    "titolo": "Idoneita Google Discover sui post",
-    "url": "https://simracing.fan/blog/",
-    "tipo": "discover",
+    "slug": "rankmath-template-breadcrumb",
+    "titolo": "Template title/meta per CPT + breadcrumb attivi",
+    "url": "https://simracing.fan/",
+    "tipo": "tecnico",
     "priorita": "medio",
-    "descrizione": "Per entrare in Discover servono: Article schema completo, immagini >=1200px con max-image-preview:large, dateModified aggiornato, author con E-E-A-T. Da verificare/sistemare sui post pubblicati.",
-    "azione_suggerita": "seo-schema + seo-geo sui post: validare Article(headline,image>=1200,datePublished,dateModified,author Person+sameAs,publisher); abilitare max-image-preview:large."
+    "descrizione": "Verificare i template title/meta di Rank Math per resources/events/products e attivare i breadcrumb (valorizzano gli URL gerarchici gia buoni).",
+    "azione_suggerita": "Rank Math -> Impostazioni titoli (template per tipo) + Generali -> Breadcrumb: attiva."
+  },
+  {
+    "slug": "blog-dormiente-accendere",
+    "titolo": "Accendere il dormiente: primi 10-20 post evergreen",
+    "url": "https://simracing.fan/blog/",
+    "tipo": "contenuto",
+    "priorita": "medio",
+    "descrizione": "200+ bozze EN pronte/dormienti in Asana (Reparto Redazione). Al lancio il blog non deve essere vuoto.",
+    "azione_suggerita": "Coordinare con la Redazione: pubblicare i primi 10-20 evergreen con immagine >=1200px + Article schema. Candidabili a Discover."
   },
   {
     "slug": "topic-cluster-simracing",
-    "titolo": "Costruire topic cluster (hub-and-spoke)",
+    "titolo": "Topic cluster (hub-and-spoke) per il blog",
     "url": "https://simracing.fan/",
     "tipo": "contenuto",
     "priorita": "medio",
-    "descrizione": "I temi del blog (Assetto Corsa EVO, calendari iRacing, DTM Esports, Forza Horizon) hanno potenziale di cluster: pillar + spoke con link interni aumentano autorita topica.",
-    "azione_suggerita": "Eseguire /seo cluster su seed 'simracing' / 'assetto corsa' / 'iracing'; produrre brief pillar+spoke per la Redazione con matrice link interni."
+    "descrizione": "Temi forti (Assetto Corsa EVO, calendari iRacing, DTM Esports, Forza Horizon): pillar + spoke con link interni = autorita topica.",
+    "azione_suggerita": "Eseguire /seo cluster su seed 'simracing'/'assetto corsa'/'iracing'; produrre brief pillar+spoke per la Redazione."
   },
   {
-    "slug": "marketplace-google-shopping-free",
-    "titolo": "Marketplace assente dai Google free listings",
-    "url": "https://simracing.fan/negozio/",
-    "tipo": "ecommerce",
-    "priorita": "medio",
-    "descrizione": "I prodotti vendor del marketplace non sono nei Google free product listings (Shopping gratuito). Opportunita di traffico gratuito.",
-    "azione_suggerita": "Creare Google Merchant Center (gratis) + verificare dominio; scegliere un plugin feed WooCommerce che supporti i prodotti WCFM multi-vendor (DA VALIDARE: CTX Feed o plugin feed specifico WCFM); attivare free listings; prima pulire i junk products. Vedi linee guida SEO sez. 8."
+    "slug": "categorie-risorsa-vuote",
+    "titolo": "10 categorie risorsa vuote (thin) — riempire o noindex",
+    "url": "https://simracing.fan/resources/",
+    "tipo": "indicizzazione",
+    "priorita": "basso",
+    "descrizione": "18 resource-category definite ma 10 con 0 risorse. Archivi categoria vuoti = thin content.",
+    "azione_suggerita": "Riempirle col tempo oppure metterle a noindex finche vuote."
   },
   {
     "slug": "llms-txt-geo-baseline",
-    "titolo": "llms.txt presente: mantenere e arricchire (AI/GEO)",
+    "titolo": "AI/GEO: llms.txt presente, mantenere e monitorare",
     "url": "https://simracing.fan/llms.txt",
     "tipo": "geo",
     "priorita": "basso",
-    "descrizione": "llms.txt risponde 200 (generato da Rank Math) e i crawler AI non sono bloccati: buona base per citazioni AI (ChatGPT/Perplexity/AI Overviews). Mantenere; passaggi citabili 130-170 parole.",
-    "azione_suggerita": "Monitorare la presenza in risposte AI (seo-geo; opz. seo-seranking/Profound quando collegati). Baseline drift dopo le prime pubblicazioni."
+    "descrizione": "llms.txt presente (Rank Math) e crawler AI non bloccati: buona base per citazioni AI. Baseline drift dopo le prime pubblicazioni.",
+    "azione_suggerita": "Mantenere; monitorare presenza in risposte AI (seo-geo; opz. seo-seranking/Profound quando collegati)."
+  },
+  {
+    "slug": "marketplace-google-shopping-free",
+    "titolo": "POST-LANCIO: marketplace nei Google Shopping free listings",
+    "url": "https://simracing.fan/negozio/",
+    "tipo": "ecommerce",
+    "priorita": "basso",
+    "descrizione": "188 prodotti reali: opportunita di traffico gratuito via Google free product listings. Da fare dopo il lancio (sito indicizzabile).",
+    "azione_suggerita": "Google Merchant Center (gratis) + verifica dominio; plugin feed WooCommerce con supporto WCFM multi-vendor (DA VALIDARE); free listings. Vedi linee guida SEO sez. 8."
+  },
+  {
+    "slug": "interruttore-lancio-noindex",
+    "titolo": "INTERRUTTORE DI LANCIO: togliere il noindex (ultimo passo)",
+    "url": "https://simracing.fan/",
+    "tipo": "lancio",
+    "priorita": "basso",
+    "descrizione": "Il sito e noindex di proposito (pre-lancio, scelta di Fabio). Questo e l'ULTIMO passo, quando i BLOCCANTI sopra sono completi.",
+    "azione_suggerita": "WP -> Impostazioni -> Lettura -> togli 'Scoraggia i motori di ricerca' -> Salva; poi GSC -> Controllo URL -> Richiedi indicizzazione."
   }
 ]

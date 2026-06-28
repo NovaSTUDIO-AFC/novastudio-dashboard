@@ -133,9 +133,22 @@ function cardGuardia() {
       <div>
         <div class="nm">Guardia Mac mini · ${stato}</div>
         <div class="d">${dett}${probl}</div>
+        ${sparkline(s.storia)}
         <div class="ex">aggiornato alle ${ora}${vecchio ? " · controlla se la guardia è attiva" : ""}</div>
       </div>
     </div>`;
+}
+
+// Mini-grafico temperatura ultime 24h (SVG inline, nessuna libreria).
+function sparkline(arr) {
+  if (!Array.isArray(arr) || arr.length < 2) return "";
+  const w = 130, h = 22, min = Math.min(...arr), max = Math.max(...arr), rng = (max - min) || 1;
+  const pts = arr.map((v, i) =>
+    `${(i / (arr.length - 1) * w).toFixed(1)},${(h - (v - min) / rng * h).toFixed(1)}`).join(" ");
+  return `<div class="ex" style="display:flex;align-items:center;gap:6px">
+    <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}"
+      fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/></svg>
+    <span style="opacity:.6">${min}–${max}°C · 24h</span></div>`;
 }
 
 renderMap();
