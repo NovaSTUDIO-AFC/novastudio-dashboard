@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Analytics — Guida &amp; checklist — NovaSTUDIO</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1018" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <script src="assets/pwa.js" defer></script>
+  <style>
+    .doc { line-height:1.6; color:#dce6f3; max-width:880px; }
+    .doc h1 { font-size:24px; margin:1.2rem 0 .4rem; }
+    .doc h2 { font-size:20px; margin:1.7rem 0 .5rem; padding-top:.7rem; border-top:1px solid #1c2740; }
+    .doc h3 { font-size:16px; margin:1.1rem 0 .4rem; color:#cfe0f5; }
+    .doc p { margin:.5rem 0; }
+    .doc ul, .doc ol { margin:.4rem 0 .8rem; padding-left:1.3rem; }
+    .doc li { margin:.28rem 0; }
+    .doc code { background:#0e1622; border:1px solid #243049; border-radius:5px; padding:1px 5px; font-size:.92em; word-break:break-word; }
+    .doc pre { background:#0e1622; border:1px solid #243049; border-radius:8px; padding:.7rem .9rem; overflow-x:auto; margin:.6rem 0; }
+    .doc pre code { border:0; padding:0; background:none; font-size:.86em; line-height:1.5; }
+    .doc blockquote { margin:.6rem 0; padding:.5rem .9rem; border-left:3px solid #4f8cff;
+      background:#101a2a; border-radius:0 8px 8px 0; color:#c3d0e2; }
+    .doc table { width:100%; border-collapse:collapse; margin:.7rem 0; font-size:13.5px; }
+    .doc th, .doc td { border:1px solid #243049; padding:6px 9px; text-align:left; vertical-align:top; }
+    .doc th { background:#101826; color:#9cc0ff; }
+    .gate { color:#ffce85; font-weight:700; }
+    .ok { color:#7fe0a0; font-weight:700; }
+    .no { color:#ff9a9a; font-weight:700; }
+    .pill { display:inline-block; font-size:11px; font-weight:700; border-radius:20px; padding:1px 9px; }
+    .p1 { background:#13311f; color:#7fe0a0; }
+    .p2 { background:#2a2913; color:#ffce85; }
+    .p3 { background:#2a1b13; color:#ffb38a; }
+    .px { background:#241a2c; color:#d6a8ff; }
+  </style>
+</head>
+<body>
+  <header id="site-nav" class="site-header"></header>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Analytics — Guida &amp; checklist collegamenti</h1>
+        <div class="sub">Quali fonti dati collegare per il centro analytics di Simracing.Fan, come, in che ordine. Da fare con calma.</div>
+      </div>
+    </header>
+    <section><article class="doc">
+
+<blockquote><p><b>Il principio.</b> Non esiste un "pacchetto analytics" unico per Claude Code: la strada vera è <b>un connettore per piattaforma</b> (quasi tutti server MCP ufficiali o API). La buona notizia: GA4, Matomo e WooCommerce hanno già un MCP ufficiale/nativo — niente roba community sospetta dove conta. <b>Esegue Max, non tu:</b> ogni riga qui sotto è un lavoro mio. <b>Una regola tua resta:</b> ogni collegamento è un'installazione → <b>audit prima</b>, si parte dagli ufficiali.</p></blockquote>
+
+<h2>1. Checklist rapida (priorità → valore)</h2>
+<p>Ordine pensato per "un pezzo alla volta, partendo dal valore". <span class="pill p1">1</span> = parti da qui · <span class="pill p2">2</span> = subito dopo · <span class="pill p3">3</span> = quando il commerce/adv conta · <span class="pill px">∅</span> = nessun buon collegamento.</p>
+<table>
+  <tr><th>Pri</th><th>Piattaforma</th><th>A cosa serve</th><th>Connettore consigliato</th><th>Tipo</th><th>Costo</th></tr>
+  <tr><td><span class="pill p1">1</span></td><td><b>GA4</b> ✅ già attivo</td><td>Traffico, comportamento, conversioni</td><td>MCP ufficiale Google</td><td><span class="ok">Ufficiale</span></td><td>Gratis</td></tr>
+  <tr><td><span class="pill p1">1</span></td><td><b>Search Console</b></td><td>Query, posizioni, indicizzazione (SEO)</td><td>API ufficiale Google (+ MCP community)</td><td>API uff.</td><td>Gratis</td></tr>
+  <tr><td><span class="pill p2">2</span></td><td><b>Matomo</b> ✅ già attivo</td><td>Seconda lente, privacy-first</td><td>MCP ufficiale Matomo (plugin)</td><td><span class="ok">Ufficiale</span></td><td>Gratis</td></tr>
+  <tr><td><span class="pill p2">2</span></td><td><b>WooCommerce</b></td><td>Ordini, prodotti, clienti, fatturato</td><td>REST API ufficiale</td><td><span class="ok">Ufficiale</span></td><td>Gratis</td></tr>
+  <tr><td><span class="pill p3">3</span></td><td><b>Meta Pixel + CAPI</b></td><td>Tracking adv server-side</td><td>Plugin "Facebook for WooCommerce" (CAPI integrata)</td><td>Plugin uff.</td><td>Gratis</td></tr>
+  <tr><td><span class="pill p3">3</span></td><td><b>Merchant Center</b></td><td>Feed prodotti / Google Shopping</td><td>Plugin "Google for WooCommerce" + Content API</td><td>Plugin uff.</td><td>Gratis</td></tr>
+  <tr><td><span class="pill p3">3</span></td><td><b>Microsoft Clarity</b></td><td>Heatmap / registrazioni (segnali)</td><td>Solo Data Export API (sottile)</td><td>API limitata</td><td>Gratis</td></tr>
+  <tr><td><span class="pill px">∅</span></td><td><b>Hotjar</b></td><td>Heatmap / registrazioni</td><td><span class="no">Nessuna API pubblica — non collegabile</span></td><td>—</td><td>—</td></tr>
+</table>
+
+<h2>2. I collegamenti, uno per uno</h2>
+
+<h3>📈 GA4 — MCP ufficiale Google <span class="pill p1">parti da qui</span></h3>
+<p><b>Cos'è:</b> server MCP ufficiale di Google (repo <code>googleanalytics/google-analytics-mcp</code>) che dà a Max accesso ai report e ai dati grezzi via Data API + Admin API. <b>Ufficiale, gratis, basso rischio.</b></p>
+<p><b>Come (lo faccio io):</b> serve una credenziale Google Cloud (service account JSON) con accesso alla proprietà GA4. Poi:</p>
+<pre><code>claude mcp add analytics-ga4 --scope user \
+  -e "GOOGLE_APPLICATION_CREDENTIALS=/percorso/credenziali.json" \
+  -e "GOOGLE_PROJECT_ID=ID_PROGETTO" \
+  -- pipx run analytics-mcp</code></pre>
+<p><b>Da te:</b> autorizzare/creare il service account in Google Cloud (passaggio OAuth/console che richiede il tuo login) — te lo guido passo-passo quando partiamo. Doc: <code>developers.google.com/analytics/devguides/MCP</code>.</p>
+
+<h3>🔍 Search Console — API ufficiale Google <span class="pill p1">parti da qui</span></h3>
+<p><b>Cos'è:</b> dati di ricerca (query, click, impression, posizioni, indicizzazione). Coppia naturale con GA4: massimo valore SEO per i contenuti Simracing.Fan. Google non ha un MCP ufficiale, ma l'<b>API è ufficiale e matura</b>; esistono MCP community read-only ben fatti (es. <code>acamolese/google-search-console-mcp</code> — OAuth, sola lettura, MIT) <b>da auditare prima</b>.</p>
+<p><b>Come:</b> autenticazione OAuth con il tuo account Google che possiede la proprietà. <span class="gate">Gate:</span> il consenso OAuth lo dai tu una volta; poi gira Max.</p>
+
+<h3>🟣 Matomo — MCP ufficiale (plugin) <span class="pill p2">subito dopo</span></h3>
+<p><b>Cos'è:</b> Matomo ha rilasciato un <b>MCP Server ufficiale</b> (plugin <code>matomo-org/plugin-McpServer</code>). Seconda lente analytics, privacy-first, già attiva sul sito.</p>
+<p><b>Come:</b> in Matomo → <i>Amministrazione → Plugin</i> attivare <b>McpServer</b>, poi <i>Sistema → Impostazioni generali → McpServer</i> per abilitarlo. Poi lato Max:</p>
+<pre><code>claude mcp add --scope user --transport http matomo \
+  'https://TUO-MATOMO/index.php?module=McpServer' \
+  --header 'Authorization: Bearer IL_TUO_TOKEN'</code></pre>
+<blockquote><p><span class="gate">Sicurezza:</span> il <code>token_auth</code> di Matomo dà gli stessi permessi dell'utente e <b>non è limitabile a sola lettura</b>. Conviene creare un utente Matomo dedicato con accesso in <b>view</b> solo a Simracing.Fan e generare lì il token. Lo imposto io.</p></blockquote>
+
+<h3>🛒 WooCommerce — REST API ufficiale <span class="pill p2">subito dopo</span></h3>
+<p><b>Cos'è:</b> ordini, prodotti, clienti, fatturato dal sito. WooCommerce ha anche un MCP nativo nel core, ma è in <b>Developer Preview</b> (può cambiare) → per ora uso la <b>REST API ufficiale</b>, stabile e collaudata.</p>
+<p><b>Come:</b> in WooCommerce → <i>Impostazioni → Avanzate → REST API</i> generare una chiave (<code>consumer_key</code> / <code>consumer_secret</code>) in <b>sola lettura</b>. Poi Max interroga l'endpoint <code>/wp-json/wc/v3/</code>.</p>
+<blockquote><p><span class="gate">Gate:</span> chiave in <b>read-only</b> — Max legge i dati, non modifica ordini. Niente scritture sul negozio senza un tuo ok esplicito.</p></blockquote>
+
+<h3>📣 Meta Pixel + Conversions API (server-side) <span class="pill p3">quando fai adv</span></h3>
+<p><b>Attenzione:</b> questo <b>non è un MCP</b>, è <b>infrastruttura di tracking</b>. Lo standard 2025-26 per uno store WooCommerce:</p>
+<ul>
+  <li><b>Via semplice (consigliata):</b> plugin ufficiale <b>"Facebook for WooCommerce"</b> — Pixel + Conversions API (CAPI) integrate, configurazione guidata.</li>
+  <li><b>Via controllo totale:</b> <b>server-side GTM</b> (es. ospitato su <b>stape.io</b>) o <b>Conversions API Gateway</b> di Meta — più potente, più da gestire. Solo se l'adv diventa serio.</li>
+</ul>
+<p><b>Quando:</b> ha senso accenderlo quando parti con campagne a pagamento, non prima.</p>
+
+<h3>🏷️ Google Merchant Center <span class="pill p3">quando vendi</span></h3>
+<p><b>Cos'è:</b> feed prodotti per Google Shopping / free listings. <b>Come:</b> plugin ufficiale <b>"Google for WooCommerce"</b> sincronizza il catalogo → Merchant Center (Content API). <span class="gate">Gate:</span> creare l'account Merchant e l'invio feed sono azioni tue; Max prepara/controlla.</p>
+
+<h3>🔥 Microsoft Clarity <span class="pill p3">segnali, non integrazione</span></h3>
+<p><b>Verità scomoda:</b> Clarity ha solo una <b>Data Export API</b> sottile (poche metriche aggregate, finestra di pochi giorni) — <b>non</b> esporta le registrazioni di sessione e <b>non</b> ha un MCP. Utile come segnale leggero gratuito, ma il valore vero (heatmap, replay) resta da guardare a mano nella sua dashboard.</p>
+
+<h3>🚫 Hotjar <span class="pill px">non collegabile</span></h3>
+<p><b>Nessuna API pubblica</b> per heatmap/registrazioni, nessun MCP: programmaticamente è un vicolo cieco. Se vuoi quel tipo di dato "data-driven", <b>Clarity batte Hotjar</b> perché almeno un'API gratis ce l'ha. Hotjar tienilo solo come uso manuale dentro la sua dashboard.</p>
+
+<h2>3. Piano sequenziato (dal valore)</h2>
+<ol>
+  <li><b>GA4 MCP ufficiale</b> — dati già attivi, ufficiale, gratis, sicuro. Il primo passo concreto (~15 min, lo faccio io appena mi dai il via in Google Cloud).</li>
+  <li><b>Search Console API</b> — gratis, Google, alto valore SEO. Coppia naturale con GA4.</li>
+  <li><b>Matomo MCP</b> — già attivo, seconda lente con utente dedicato in sola lettura.</li>
+  <li><b>WooCommerce REST API</b> — leggere ordini/fatturato, quando il commerce conta.</li>
+  <li><b>Meta Pixel + CAPI</b> (plugin FB ufficiale) — quando parti con adv a pagamento.</li>
+  <li><b>Merchant Center</b> (plugin Google for Woo) — quando serve il feed Shopping.</li>
+  <li><b>Clarity</b> — API gratis per segnali di comportamento (accettando che è sottile).</li>
+  <li><b>Hotjar</b> — salta, o uso manuale.</li>
+</ol>
+
+<h2>4. Cosa NON ti serve sapere / fare</h2>
+<ul>
+  <li><b>Non c'è da scegliere un "pacco di skill":</b> le skill sono prompt, non danno accesso ai tuoi dati. Quello che conta sono i collegamenti qui sopra.</li>
+  <li><b>Non installi tu niente:</b> i comandi <code>claude mcp add</code> li lancio io. A te restano solo i <b>consensi/login</b> (Google Cloud, OAuth) che richiedono la tua identità, e le <b>approvazioni</b> sui gate.</li>
+  <li><b>Audit prima di ogni community connector</b> (Search Console MCP, ecc.) — è la tua regola post-incidente, la rispetto.</li>
+</ul>
+
+<blockquote><p><b>Stato:</b> guida pronta, nessun collegamento ancora attivato — è il "prima" che hai chiesto. Quando vuoi partire, dimmi solo <i>«colleghiamo GA4»</i> e ti guido passo-passo dal primo gate Google Cloud.</p></blockquote>
+
+<p style="color:#7e8aa0;font-size:12px;margin-top:1.5rem;">Fonti verificate (giu 2026): repo ufficiale GA4 MCP <code>googleanalytics/google-analytics-mcp</code> + <code>developers.google.com/analytics/devguides/MCP</code> · plugin MCP ufficiale Matomo <code>matomo-org/plugin-McpServer</code> + FAQ matomo.org · WooCommerce REST API ufficiale · Search Console API ufficiale (MCP community read-only). Clarity/Hotjar: nessun MCP, Hotjar senza API pubblica.</p>
+
+    </article></section>
+  </div>
+
+  <script src="assets/permessi.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
